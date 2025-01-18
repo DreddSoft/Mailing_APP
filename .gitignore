@@ -2,6 +2,7 @@
 *.pdf
 *.jpeg
 *.jpg 
+*.png
 *.md
 
 # Archivos y carpetas del sistema operativo
