@@ -1,0 +1,52 @@
+# Tipos de archivos
+*.pdf
+*.jpeg
+*.jpg 
+*.md
+
+# Archivos y carpetas del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de editores
+*.swp
+*.swo
+*.tmp
+.vscode/
+.idea/
+*.code-workspace
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Java
+*.class
+*.log
+
+# Archivos de entorno y configuración sensible
+.env
+.env.local
+.env.*.local
+
+# Archivos de registro
+*.log
+
+# Archivos de compilación
+dist/
+build/
+
+# Carpetas temporales de herramientas
+.tmp/
+.cache/
+
+# Otros
+*.bak
+*.old
+*.orig
