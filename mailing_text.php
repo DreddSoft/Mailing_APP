@@ -52,7 +52,7 @@
             <span>Fran</span>
             <span>Iván</span>
         </div>
-
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolorem voluptas officia accusantium vero ab dolorum, harum dolores laudantium quae laborum amet velit asperiores eaque quis iusto! Repellat, exercitationem similique?
     </footer>
 
 </body>

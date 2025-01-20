@@ -39,7 +39,24 @@
 
         <h2>Enviar correo a destino seleccionado con copia</h2>
         <!-- Aquí va el formulario -->
+        <form action="">
+            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente">
+            <br><br>
 
+            <input type="email" name="destinatario" id="destinatario" placeholder="Email del destinatario">
+            <br><br>
+
+            <input type="email" name="cc" id="cc" placeholder="Destinatario de copia">
+            <br><br>
+
+            <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje"></textarea>
+            <br><br>
+            
+            <div class="btns">
+                <button type="submit">Enviar</button>
+                <button type="reset">Borrar</button>
+            </div>
+        </form>
     </main>
     <footer>
 
