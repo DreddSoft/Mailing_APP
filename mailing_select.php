@@ -9,7 +9,7 @@
 // 5. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // 6. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 
-
+echo "Hola soy Iván";
 ?>
 <!DOCTYPE html>
 <html lang="es">
