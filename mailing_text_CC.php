@@ -9,7 +9,8 @@
 // 5. El formulario tiene que tener 2 botones: 1 de envío y otro de reset
 // 6. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // 7. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
-echo "soy david";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,7 +40,17 @@ echo "soy david";
 
         <h2>Enviar correo con copia</h2>
         <!-- Aquí va el formulario -->
-
+        <form action="mailing_text_CC.php" method="POST">
+            <input type="email" id="Remitente" required placeholder="Remitente"><br>
+            <input type="email" id="Destinatario" required placeholder="Destinatario"><br>
+            <input type="email" id="Copia" required placeholder="Copia"><br><br>
+            <div id="text-base" contenteditable="true" placeholder="Mensaje">
+            </div>
+            <div class="btns">
+            <button type="submit">Enviar</button>
+            <button type="reset">Reset</button>
+            </div>
+        </form>
     </main>
     <footer>
 
