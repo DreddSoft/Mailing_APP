@@ -36,6 +36,16 @@
 
         <h2>Login</h2>
         <!-- Aquí va el formulario -->
+         <form action="service.php" method="post">
+            <input type="text" name="user" id="user" placeholder="Usuario" required>
+            <input type="password" name="pass" id="pass" placeholder="Contraseña" required>
+
+            <div class="btns">
+                <button type="reset">Borrar</button>
+                <button type="submit">Enviar</button>
+            </div>
+    
+         </form>
 
     </main>
     <footer>
