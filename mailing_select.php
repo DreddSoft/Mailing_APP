@@ -9,7 +9,7 @@
 // 5. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // 6. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 
-echo "Hola soy Iván";
+echo "Hola soy Ivánsdfsdf";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,14 +18,14 @@ echo "Hola soy Iván";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Mailing Select</title>
 </head>
 
 <body>
     <header>
 
-        <img src="new-php-logo.png" alt="Logo de PHP">
+        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -43,7 +43,7 @@ echo "Hola soy Iván";
     </main>
     <footer>
 
-        <a href="#">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
         <h2>DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>

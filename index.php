@@ -1,7 +1,16 @@
 <?php
+session_start();
+
 
 //* Asignado: Andrés
 // Página principal con un mensaje informativo y un menu de enlaces para acceder a cada opción.
+
+// Si no esta el usuario registrado, redirigimos
+if (!$_SESSION['usuario']) {
+
+    header("Location: login.php");
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -11,14 +20,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Index</title>
 </head>
 
 <body>
     <header>
 
-        <img src="new-php-logo.png" alt="Logo de PHP">
+        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -31,12 +40,18 @@
     <main>
 
         <h2>Página Principal</h2>
-        <!-- Aquí va el formulario -->
+        <div class="enlaces">
+            <p>Aqui tiene una serie de enlaces, como en la cabecera para enviar emails</p>
+            <a href="mailing_select.php">Correo Especial</a>
+            <a href="mailing_select_CC.php">Correo Especial Copia</a>
+            <a href="mailing_text.php">Correo</a>
+            <a href="mailing_text_CC.php">Correo Copia</a>
+        </div>
 
     </main>
     <footer>
 
-        <a href="#">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
         <h2>DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>
@@ -50,5 +65,12 @@
     </footer>
 
 </body>
+
+<!-- 
+    Autor: @DreddSoft
+    Proyecto: app_mailing
+    Fecha: Enero de 2025
+    Descripción: Página principal de la aplicación de mailing.
+-->
 
 </html>

@@ -19,14 +19,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Mailing Text CC</title>
 </head>
 
 <body>
     <header>
 
-        <img src="new-php-logo.png" alt="Logo de PHP">
+        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -47,14 +47,14 @@
             <div id="text-base" contenteditable="true" placeholder="Mensaje">
             </div>
             <div class="btns">
-            <button type="submit">Enviar</button>
-            <button type="reset">Reset</button>
+                <button type="submit">Enviar</button>
+                <button type="reset">Reset</button>
             </div>
         </form>
     </main>
     <footer>
 
-        <a href="#">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
         <h2>DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>

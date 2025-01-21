@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //* Asignado: Adrían
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email que representa al remitente (el valor sera siempre el mismo)
@@ -18,14 +20,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Mailing Select CC</title>
 </head>
 
 <body>
     <header>
 
-        <img src="new-php-logo.png" alt="Logo de PHP">
+        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -41,17 +43,14 @@
         <!-- Aquí va el formulario -->
         <form action="">
             <input type="email" name="remitente" id="remitente" placeholder="Email del remitente">
-            <br><br>
 
             <input type="email" name="destinatario" id="destinatario" placeholder="Email del destinatario">
-            <br><br>
 
             <input type="email" name="cc" id="cc" placeholder="Destinatario de copia">
-            <br><br>
 
-            <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje"></textarea>
-            <br><br>
-            
+            <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje" ></textarea>
+ 
+
             <div class="btns">
                 <button type="submit">Enviar</button>
                 <button type="reset">Borrar</button>
@@ -60,7 +59,7 @@
     </main>
     <footer>
 
-        <a href="#">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
         <h2>DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>
