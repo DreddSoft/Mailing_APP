@@ -18,14 +18,14 @@ echo "Hola soy Iván";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="/assets/new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Mailing Select</title>
 </head>
 
 <body>
     <header>
 
-        <img src="/assets/new-php-logo.png" alt="Logo de PHP">
+        <img src="assets/new-php-logo.png" alt="Logo de PHP">
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>

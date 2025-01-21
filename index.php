@@ -9,7 +9,6 @@ session_start();
 if (!$_SESSION['usuario']) {
 
     header("Location: login.php");
-
 }
 
 
@@ -21,14 +20,14 @@ if (!$_SESSION['usuario']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="/assets/new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Index</title>
 </head>
 
 <body>
     <header>
 
-        <img src="/assets/new-php-logo.png" alt="Logo de PHP">
+        <img src="assets/new-php-logo.png" alt="Logo de PHP">
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -41,13 +40,13 @@ if (!$_SESSION['usuario']) {
     <main>
 
         <h2>Página Principal</h2>
-         <div class="enlaces">
+        <div class="enlaces">
             <p>Aqui tiene una serie de enlaces, como en la cabecera para enviar emails</p>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
             <a href="mailing_text.php">Correo</a>
             <a href="mailing_text_CC.php">Correo Copia</a>
-         </div>
+        </div>
 
     </main>
     <footer>

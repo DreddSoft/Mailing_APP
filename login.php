@@ -14,7 +14,6 @@ if (isset($_GET['mensaje'])) {
 
     $mensaje = htmlspecialchars($_GET['mensaje']);
     $show = true;
-
 }
 
 ?>
@@ -25,14 +24,14 @@ if (isset($_GET['mensaje'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="/assets/new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
     <title>Mail_APP</title>
 </head>
 
 <body>
     <header>
 
-    <img src="/assets/new-php-logo.png" alt="Logo de PHP">
+        <img src="assets/new-php-logo.png" alt="Logo de PHP">
         <nav style="display:none;">
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -46,7 +45,7 @@ if (isset($_GET['mensaje'])) {
 
         <h2 class="blue">Login</h2>
         <!-- Aquí va el formulario -->
-         <form action="service.php" method="post">
+        <form action="service.php" method="post">
             <input type="text" name="user" id="user" placeholder="Usuario" required autocomplete="on">
             <input type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="on">
 
@@ -55,14 +54,14 @@ if (isset($_GET['mensaje'])) {
                 <button type="submit">Enviar</button>
             </div>
 
-            <?php if ($show): 
+            <?php if ($show):
                 global $mensaje; ?>
                 <div class="mensaje">
                     <p><?= $mensaje ?></p>
                 </div>
 
             <?php endif; ?>
-         </form>
+        </form>
 
     </main>
     <footer>
@@ -87,4 +86,5 @@ if (isset($_GET['mensaje'])) {
     Fecha: Enero de 2025
     Descripción: Página de inicio y login
 -->
+
 </html>
