@@ -51,5 +51,4 @@ build/
 *.old
 *.orig
 
-# Archivo bd.class.php
 bd.class.php
