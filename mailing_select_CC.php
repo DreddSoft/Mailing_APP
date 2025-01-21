@@ -2,6 +2,16 @@
 
 session_start();
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+require_once 'vendor/autoload.php';
+
+$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
+$dotenv->load();
+
 //* Asignado: Adrían
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email que representa al remitente (el valor sera siempre el mismo)
