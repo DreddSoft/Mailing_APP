@@ -1,7 +1,20 @@
 <?php
-    //  use PHPMailer\PHPMailer\PHPMailer;
-    //  use PHPMailer\PHPMailer\SMTP;
-    //  use PHPMailer\PHPMailer\Exception;
+session_start();
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+
+require_once 'vendor/autoload.php';
+
+
+$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
+$dotenv->load();
+
+
 
 
     //* Asignado: Fran
@@ -15,8 +28,53 @@
 
 
 
-// comprobacion y tratamientos de los datos, seguir con el try y con la sintaxis alternativa
 
+    if ($_SERVER["REQUEST_METHOD"]==="POST") {
+        
+            /*Se almacena el correo y el remitente con el que se envia y reciben los correos, para asi porder enviar desde y hacia el correo que se 
+            añaden en el fomrulario*/
+
+            $remitente=$_POST["remitente"];
+            $destinatario=$_POST["destinatario"];
+            $cuerpoEmail=$_POST["text_base"];
+            require 'vendor/autoload.php';
+
+            //Create an instance; passing `true` enables exceptions
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = $_ENV["SMTP_HOST"];                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = $_ENV["SMTP_USER"];                     //SMTP username
+                $mail->Password   = $_ENV["SMTP_PASS"];                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = $_ENV["SMTP_PORT"];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom($remitente);/*correo del remitente, recuperado del formulario */
+                $mail->addAddress($destinatario);/* correo del destinatario, recuperado del formulario*/     
+              
+
+                
+                
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Here is the subject';
+                $mail->Body    = $cuerpoEmail;
+
+                $mail->send();
+                echo 'El correo se ha enviado de forma exitosa, su destinatario debe haber recivido el correo';
+            } catch (Exception $e) {
+               die("Error: no se puedo enviar de forma correcta el correo. Mailer Error: {$mail->ErrorInfo}");
+                
+            }
+           
+    }
+    
 ?>   
 
 
@@ -49,11 +107,12 @@
 
         <h2>Enviar correo</h2>
         <!-- Aquí va el formulario -->
-        <form action="mailing_text.php">
-            <input id="remitente" type="email" placeholder="email remitente" required><br>
-            <input id="destinatario" type="email" placeholder="email destinatario" required><br>
+        <form action="mailing_text.php" method="post">
+            <input id="remitente" type="email" placeholder="email remitente"  name="remitente" readonly value="fgutram@g.educaand.es"><br>
+            <input id="destinatario" type="email" placeholder="email destinatario" name="destinatario" required><br>
 
-            <div id="tex_base" contenteditable="true"></div> <!-- igual de un text area, pero mas bonito -->
+            <div id="text_base" contenteditable="true" name="mensaje"  ></div> 
+            <!-- igual que el texarea -->
 
             <div class="btns">
                 <button type="submit">Enviar</button>
