@@ -11,23 +11,17 @@
 
 
 // comprobacion y tratamientos de los datos, swguir con el try y con la sintaxis alternativa
-if ($_SERVER["REQUEST_METHOD"]==="POST") {
-    $remitente=$_REQUEST["remitente"];
-    $destinatario=$_REQUEST["destinatario"];
-    $tex_base=$_REQUEST["tex-base"];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $remitente = $_REQUEST["remitente"];
+    $destinatario = $_REQUEST["destinatario"];
+    $tex_base = $_REQUEST["tex-base"];
 
-    try{
-        if(htmlspecialchars(isset($remitente))&&htmlspecialchars(isset($destinatario))){
-
+    try {
+        if (htmlspecialchars(isset($remitente)) && htmlspecialchars(isset($destinatario))) {
         }
-    }catch(Exception $e){
-       $menssage=true;/*Variable en verdadero, para hacer el lanzamiento del error en el fomrulario, con la sintaxis alternativa*/ 
-      
+    } catch (Exception $e) {
+        $menssage = true;/*Variable en verdadero, para hacer el lanzamiento del error en el fomrulario, con la sintaxis alternativa*/
     }
-
-    
-   
-
 }
 
 
@@ -48,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
 <body>
     <header>
 
-        <img src="new-php-logo.png" alt="Logo de PHP">
+        <img src="/assets/new-php-logo.png" alt="Logo de PHP">
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -62,12 +56,12 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
 
         <h2>Enviar correo</h2>
         <!-- Aquí va el formulario -->
-         <form action="mailing_text.php"> 
-            <input id="remitente"type="email" placeholder="email remitente" required><br>
+        <form action="mailing_text.php">
+            <input id="remitente" type="email" placeholder="email remitente" required><br>
             <input id="destinatario" type="email" placeholder="email destinatario" required><br>
 
             <div id="tex_base" contenteditable="true"></div> <!-- igual de un text area, pero mas bonito -->
-            
+
             <div class="btns">
                 <button type="submit">Enviar</button>
                 <button type="reset">Borrar</button>
@@ -75,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
 
             <!-- Estructura de sintaxis alternativa, para el lanzamiento del error -->
 
-         </form> 
+        </form>
 
     </main>
     <footer>

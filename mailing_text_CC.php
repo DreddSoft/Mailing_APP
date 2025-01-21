@@ -26,7 +26,7 @@
 <body>
     <header>
 
-        <img src="new-php-logo.png" alt="Logo de PHP">
+        <img src="/assets/new-php-logo.png" alt="Logo de PHP">
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -47,8 +47,8 @@
             <div id="text-base" contenteditable="true" placeholder="Mensaje">
             </div>
             <div class="btns">
-            <button type="submit">Enviar</button>
-            <button type="reset">Reset</button>
+                <button type="submit">Enviar</button>
+                <button type="reset">Reset</button>
             </div>
         </form>
     </main>
