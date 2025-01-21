@@ -1,6 +1,10 @@
 <?php
+    //  use PHPMailer\PHPMailer\PHPMailer;
+    //  use PHPMailer\PHPMailer\SMTP;
+    //  use PHPMailer\PHPMailer\Exception;
 
-//* Asignado: Fran
+
+    //* Asignado: Fran
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email
 // 2. DESTINATARIO: Un campo input:email
@@ -10,24 +14,13 @@
 // 6. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 
 
-// comprobacion y tratamientos de los datos, swguir con el try y con la sintaxis alternativa
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $remitente = $_REQUEST["remitente"];
-    $destinatario = $_REQUEST["destinatario"];
-    $tex_base = $_REQUEST["tex-base"];
 
-    try {
-        if (htmlspecialchars(isset($remitente)) && htmlspecialchars(isset($destinatario))) {
-        }
-    } catch (Exception $e) {
-        $menssage = true;/*Variable en verdadero, para hacer el lanzamiento del error en el fomrulario, con la sintaxis alternativa*/
-    }
-}
+// comprobacion y tratamientos de los datos, seguir con el try y con la sintaxis alternativa
+
+?>   
 
 
 
-
-?>
 <!DOCTYPE html>
 <html lang="es">
 
