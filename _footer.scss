@@ -1,0 +1,41 @@
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    background-color: $white-base;
+    box-shadow: -4px 0 10px $silver;
+    color: $black;
+
+
+    & a {
+        text-decoration: none;
+        color: $eerie-black;
+        font-family: $font-title;
+        letter-spacing: 1px;
+        transition: 300ms ease-in-out;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+            border-bottom: 1px solid $ecru;
+            color: $ecru;
+        }
+
+    }
+
+    & .equipo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        & span {
+            color: $silver;
+            font-size: 12px;
+        }
+    }
+
+
+}
