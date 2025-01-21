@@ -33,10 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $copia = htmlspecialchars($_POST["copia"]);
     if (isset($_POST["mensaje"])) {
         $mensaje = $_POST["mensaje"];
-    } 
+    }
+
+    // Controlamos que el usuario haya rellenado el asunto
+    if (isset($_POST['asunto'])) {
+        $asunto = htmlspecialchars($_POST['asunto']);
+    } else {
+        $asunto = "Mail enviado por Mailing_APP, desarrollada por LosPutosAmos";
+    }
 
 
-    $email = new PHPMailer(true);
+    $email = new PHPMailer();
 
     try {
 
@@ -44,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email->isSMTP();
         $email->SMTPAuth = true;
         $email->SMTPSecure = 'ssl';
-        $email->Port = "465";
+        // $email->Port = "465";
 
         //configuracion del servidor SMTP
         $email->Host = $_ENV["SMTP_HOST"];
@@ -53,10 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
         //confiiguracion del mail
-        $email->setFrom($remitente, "Remitente");
+        $email->setFrom($_ENV['SMTP_USER']);
         $email->addAddress($destino);
         $email->addCC($copia);
-        $email->Subject = 'Asunto del correo';
+        $email->Subject = $asunto;
         $email->isHTML(true);
         $email->Body = $mensaje;
 
@@ -98,13 +105,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Enviar correo con copia</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text_CC.php" method="POST">
-            <input type="email" id="remitente" required placeholder="Remitente" name="remitente">
+            <input type="email" id="remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" name="remitente" readonly>
             <input type="email" id="destino" required placeholder="Destinatario" name="destino">
             <input type="email" id="copia" required placeholder="Copia" name="copia">
-            <div id="text-base" contenteditable="true" placeholder="Mensaje" id="mensaje" name="mensaje">
-            </div>
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
+            <div class="text-base" contenteditable="true" id="base"></div>
+            <input type="hidden" name="mensaje" id="mensaje">
             <div class="btns">
-                <button type="submit">Enviar</button>
+                <button type="submit" onclick="prepararMensaje();">Enviar</button>
                 <button type="reset">Reset</button>
             </div>
         </form>
@@ -123,6 +131,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
     </footer>
+
+    <script>
+        function prepararMensaje() {
+            // Capturamos el contenido del texto-base
+            const mensaje = document.getElementById('base').innerHTML;
+            // Asignamos ese contenido al input oculto que enviara el mensaje
+            document.getElementById('mensaje').value = mensaje;
+        }
+    </script>
 
 </body>
 
