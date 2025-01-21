@@ -9,6 +9,30 @@
 // 5. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // 6. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 
+
+// comprobacion y tratamientos de los datos, swguir con el try y con la sintaxis alternativa
+if ($_SERVER["REQUEST_METHOD"]==="POST") {
+    $remitente=$_REQUEST["remitente"];
+    $destinatario=$_REQUEST["destinatario"];
+    $tex_base=$_REQUEST["tex-base"];
+
+    try{
+        if(htmlspecialchars(isset($remitente))&&htmlspecialchars(isset($destinatario))){
+
+        }
+    }catch(Exception $e){
+       $menssage=true;/*Variable en verdadero, para hacer el lanzamiento del error en el fomrulario, con la sintaxis alternativa*/ 
+      
+    }
+
+    
+   
+
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -38,6 +62,20 @@
 
         <h2>Enviar correo</h2>
         <!-- Aquí va el formulario -->
+         <form action="mailing_text.php"> 
+            <input id="remitente"type="email" placeholder="email remitente" required><br>
+            <input id="destinatario" type="email" placeholder="email destinatario" required><br>
+
+            <div id="tex_base" contenteditable="true"></div> <!-- igual de un text area, pero mas bonito -->
+            
+            <div class="btns">
+                <button type="submit">Enviar</button>
+                <button type="reset">Borrar</button>
+            </div>
+
+            <!-- Estructura de sintaxis alternativa, para el lanzamiento del error -->
+
+         </form> 
 
     </main>
     <footer>
@@ -52,7 +90,6 @@
             <span>Fran</span>
             <span>Iván</span>
         </div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolorem voluptas officia accusantium vero ab dolorum, harum dolores laudantium quae laborum amet velit asperiores eaque quis iusto! Repellat, exercitationem similique?
     </footer>
 
 </body>
