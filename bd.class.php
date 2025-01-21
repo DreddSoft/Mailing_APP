@@ -10,15 +10,18 @@ $dotenv->load();
 class bd
 {
 
+    // Variables privadas
     private $host;
     private $user;
     private $pass;
     private $name_database;
     private $conn;
 
+    // Constructor
     public function __construct()
     {
-        // Asignar las variables de entorno a las propiedades
+        // Asignar las variables de entorno a las propiedades para asi proteger mas la conexión
+        // También que sea más fácil personalizarlas dependiendo
         $this->host = $_ENV['DB_HOST'];
         $this->user = $_ENV['DB_USER'];
         $this->pass = $_ENV['DB_PASS'];
@@ -36,12 +39,9 @@ class bd
         }
     }
 
-    // Funcion para capturar datos que devuelve un array
+    //* Funcion para capturar datos que devuelve un array
     public function capturarDatos($sql)
     {
-
-        // Preparamos la sentencia SQL
-        $stmt = $this->conn->prepare($sql);
 
         $query = mysqli_query($this->conn, $sql);
 

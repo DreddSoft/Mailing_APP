@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Este es un metodo propio que devuelve un array con los datos
         $dataUsuarios = $bd->capturarDatos($sql);
-        var_dump($dataUsuarios);
+        // var_dump($dataUsuarios);
 
         // Comprobacion de usuario y contrasenia
         if (strtolower($user) === strtolower($dataUsuarios[0]['email']) && $pass === $dataUsuarios[0]['pass']) {

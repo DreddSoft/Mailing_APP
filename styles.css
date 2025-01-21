@@ -158,6 +158,9 @@ main form .btns button:active {
   -webkit-transform: translateY(3px);
   -moz-transform: translateY(3px);
 }
+main form .mensaje {
+  color: red;
+}
 main .enlaces {
   display: flex;
   flex-direction: column;

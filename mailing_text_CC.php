@@ -54,7 +54,7 @@
     </main>
     <footer>
 
-        <a href="https://github.com/DreddSoft/Mailing_APP">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
         <h2>DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>
