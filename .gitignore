@@ -50,3 +50,5 @@ build/
 *.bak
 *.old
 *.orig
+
+bd.class.php

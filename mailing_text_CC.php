@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //* Asignado: David
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email que representa al remitente (el valor sera siempre el mismo)
@@ -16,8 +16,44 @@ use Dotenv\Dotenv;
 
 require '../vendor/autoload.php';
 
-$dotenv = Dotenv:createInmutable('/otp/lampp/htdocs');
+$dotenv = Dotenv::createInmutable('/opt/lampp/htdocs/Mailing_APP');
 $dotenv->load();
+
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+    $remitente = $_POST["remitente"];
+    $destino = $_POST["destino"];
+    $mensaje = $_POST["mensaje"];
+
+    $email = new PHPMailer(true);
+
+    try{
+        //configuracion de phpmailer
+        $email->isSMTP();
+        $email->SMTPAuth = true;
+        $email->SMTPSecure = 'ssl';
+        $email->Port = 465;
+
+        //configuracion del servidor SMTP
+        $email->Host = 'smpt.gmail.com'
+        $email->Username = $remitente;
+        $email->Password = 'guqh bvao qcac wnyo';
+
+        //confiiguracion del mail
+        $email->setFrom($remitente);
+        $email->addAddress($destino);
+        $email->Subject = 'PHPMailer Gmail';
+        $email->isHTML(true);
+        $email->Body = $mensaje;
+
+        //funcion que manda el correo
+        $email->Send();
+        echo 'El mensaje se ha enviado correctamente';
+    }catch (Exception $e){
+        echo 'El mensaje no se ha podido enviar correctamente';
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -49,10 +85,10 @@ $dotenv->load();
         <h2>Enviar correo con copia</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text_CC.php" method="POST">
-            <input type="email" id="Remitente" required placeholder="Remitente"><br>
-            <input type="email" id="Destinatario" required placeholder="Destinatario"><br>
-            <input type="email" id="Copia" required placeholder="Copia"><br><br>
-            <div id="text-base" contenteditable="true" placeholder="Mensaje">
+            <input type="email" id="remitente" required placeholder="Remitente" name="remitente" ><br>
+            <input type="email" id="destino" required placeholder="Destinatario" name="destino" ><br>
+            <input type="email" id="Copia" required placeholder="Copia" name="copia"><br><br>
+            <div id="text-base" contenteditable="true" placeholder="Mensaje" id="mensaje" name="mensaje" >
             </div>
             <div class="btns">
                 <button type="submit">Enviar</button>
