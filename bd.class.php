@@ -4,16 +4,7 @@ require_once 'vendor/autoload.php';
 
 use Dotenv\Dotenv;  // Esto es para abrir el archivo .env con la información delicada
 
-<<<<<<< HEAD
-
-
-
-$rutaAndres= "C:/xampp/htdocs/mailing_app";
-
-$dotenv = Dotenv::createImmutable($rutaAndres);
-=======
 $dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
->>>>>>> 58476ccd2e3858076f5dee4117d9ba62a22d814d
 $dotenv->load();
 
 class bd
