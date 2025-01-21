@@ -1,15 +1,5 @@
+@import '_variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap');
-
-$white-base: #fff;
-$anti-flash-white: #C0BCB5;
-$silver: #C0BCB5;
-$eerie-black: #1c2321;
-$black: #0c0c0c;
-$ecru: #D0B17A;
-$prusian-blue: #173753;
-
-$font-base: 'Poppins', sans-serif;
-$font-title: 'Montserrat', 'Arial';
 
 body {
     box-sizing: border-box;
@@ -77,7 +67,7 @@ main {
     gap: 2rem;
     margin: 2rem 0;
 
-    & form {
+    & .login {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -86,23 +76,45 @@ main {
         border: 1px solid $silver;
         border-radius: 10px;
         box-shadow: 0 0 10px 3px $silver;
-        padding: 40px;
+        padding: 40px 0;
+        width: 400px;
+        overflow: hidden;
+
+        & input {
+            width: 200px;
+            text-align: center;
+        }
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        // gap: 2rem;
+        border: 1px solid $silver;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 3px $silver;
+        // padding:  0;
+        width: 600px;
+        overflow: hidden;
 
         & input {
             padding: 0.7rem 1.2rem;
             color: $black;
             border: 1px solid $silver;
-            border-radius: 8px;
-            text-align: center;
+            border-radius: 2px;
+            text-align: start;
             font-family: $font-title;
             min-width: 250px;
+            width: 95%;
 
             &::placeholder {
                 color: $silver;
                 letter-spacing: 2px;
             }
             &:focus {
-                border: 1px solid $prusian-blue;
+                border: 1px solid transparent;
 
             }
         }
@@ -112,6 +124,7 @@ main {
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            margin: 1rem 0;
             gap: 2rem;
 
             & button {
@@ -140,6 +153,16 @@ main {
                     -moz-transform: translateY(3px);
                 }
             }
+        }
+
+        & textarea {
+            width: 99%;
+            border: 1px solid $silver;
+            border-radius: 4px;
+            height: 400px;
+            resize: none;
+            padding: 10px 5px 10px 10px;
+
         }
 
         & .mensaje {

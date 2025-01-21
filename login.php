@@ -31,7 +31,7 @@ if (isset($_GET['mensaje'])) {
 <body>
     <header>
 
-        <img src="assets/new-php-logo.png" alt="Logo de PHP">
+        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
         <nav style="display:none;">
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -45,7 +45,7 @@ if (isset($_GET['mensaje'])) {
 
         <h2 class="blue">Login</h2>
         <!-- Aquí va el formulario -->
-        <form action="service.php" method="post">
+        <form action="service.php" method="post" class="login">
             <input type="text" name="user" id="user" placeholder="Usuario" required autocomplete="on">
             <input type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="on">
 

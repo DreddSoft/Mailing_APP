@@ -100,7 +100,7 @@ main {
   gap: 2rem;
   margin: 2rem 0;
 }
-main form {
+main .login {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,29 +109,48 @@ main form {
   border: 1px solid #C0BCB5;
   border-radius: 10px;
   box-shadow: 0 0 10px 3px #C0BCB5;
-  padding: 40px;
+  padding: 40px 0;
+  width: 400px;
+  overflow: hidden;
+}
+main .login input {
+  width: 200px;
+  text-align: center;
+}
+main form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #C0BCB5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 3px #C0BCB5;
+  width: 600px;
+  overflow: hidden;
 }
 main form input {
   padding: 0.7rem 1.2rem;
   color: #0c0c0c;
   border: 1px solid #C0BCB5;
-  border-radius: 8px;
-  text-align: center;
+  border-radius: 2px;
+  text-align: start;
   font-family: "Montserrat", "Arial";
   min-width: 250px;
+  width: 95%;
 }
 main form input::placeholder {
   color: #C0BCB5;
   letter-spacing: 2px;
 }
 main form input:focus {
-  border: 1px solid #173753;
+  border: 1px solid transparent;
 }
 main form .btns {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 1rem 0;
   gap: 2rem;
 }
 main form .btns button {
@@ -157,6 +176,14 @@ main form .btns button:active {
   transform: translateY(3px);
   -webkit-transform: translateY(3px);
   -moz-transform: translateY(3px);
+}
+main form textarea {
+  width: 99%;
+  border: 1px solid #C0BCB5;
+  border-radius: 4px;
+  height: 400px;
+  resize: none;
+  padding: 10px 5px 10px 10px;
 }
 main form .mensaje {
   color: red;
@@ -195,7 +222,7 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 1rem 2rem;
   background-color: #fff;
   box-shadow: -4px 0 10px #C0BCB5;
   color: #0c0c0c;

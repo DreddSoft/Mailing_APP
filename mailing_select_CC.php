@@ -25,7 +25,7 @@
 <body>
     <header>
 
-        <img src="assets/new-php-logo.png" alt="Logo de PHP">
+        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
         <nav>
             <a href="mailing_select.php">Correo Especial</a>
             <a href="mailing_select_CC.php">Correo Especial Copia</a>
@@ -41,16 +41,13 @@
         <!-- Aquí va el formulario -->
         <form action="">
             <input type="email" name="remitente" id="remitente" placeholder="Email del remitente">
-            <br><br>
 
             <input type="email" name="destinatario" id="destinatario" placeholder="Email del destinatario">
-            <br><br>
 
             <input type="email" name="cc" id="cc" placeholder="Destinatario de copia">
-            <br><br>
 
-            <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje"></textarea>
-            <br><br>
+            <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje" ></textarea>
+ 
 
             <div class="btns">
                 <button type="submit">Enviar</button>
