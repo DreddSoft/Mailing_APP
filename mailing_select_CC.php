@@ -53,6 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $copia = $_POST['copia'];
     $cuerpoEmail = $_POST['cuerpo'];
 
+    // Condicional para controlar que no haya error con el asunto
+    if ($_POST['asunto']) {
+        $asunto = htmlspecialchars($_POST['asunto']);
+    } else {
+        $asunto = "Envio de mail sin asunto realizado por la aplicación más cañera: Mailing_APP";
+    }
+
     $mail = new PHPMailer(true);
 
     try {
@@ -73,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Contenido del correo
         $mail->isHTML(true);
-        $mail->Subject = 'Asunto del correo';
+        $mail->Subject = $asunto;
         $mail->Body = $cuerpoEmail;
 
         $mail->send();
@@ -113,22 +120,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h2>Enviar correo a destino seleccionado con copia</h2>
         <!-- Aquí va el formulario -->
         <form method="post">
-            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente" value="<?php echo "ajimvil713@gmail.com" ?>" readonly>
+            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" readonly>
 
             <select name="destinatario" id="destinatario">
-                <?php foreach($datos as $dato): ?>
-                <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
+                <?php foreach ($datos as $dato): ?>
+                    <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
                 <?php endforeach; ?>
             </select>
 
             <select name="copia" id="copia">
-                <?php foreach($datos as $dato): ?>
-                <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
+                <?php foreach ($datos as $dato): ?>
+                    <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
                 <?php endforeach; ?>
             </select>
 
+            <input type="text" name="asunto" id="asunto">
+
             <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje" require></textarea>
- 
+
 
             <div class="btns">
                 <button type="submit">Enviar</button>

@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <?php endforeach; ?>
             </select>
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
             <div class="text-base" contenteditable="true" id="base"></div>
             <input type="hidden" name="mensaje" id="mensaje">
             <div class="btns">

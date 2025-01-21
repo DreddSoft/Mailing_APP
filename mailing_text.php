@@ -37,7 +37,6 @@ $dotenv->load();
             $remitente=$_POST["remitente"];
             $destinatario=$_POST["destinatario"];
             $cuerpoEmail=$_POST["text_base"];
-            require 'vendor/autoload.php';
 
             //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
@@ -108,14 +107,15 @@ $dotenv->load();
         <h2>Enviar correo</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text.php" method="post">
-            <input id="remitente" type="email" placeholder="email remitente"  name="remitente" readonly value="fgutram@g.educaand.es"><br>
-            <input id="destinatario" type="email" placeholder="email destinatario" name="destinatario" required><br>
-
-            <div id="text_base" contenteditable="true" name="mensaje"  ></div> 
+            <input id="remitente" type="email" placeholder="email remitente"  name="remitente" readonly value="<?php echo $_ENV["SMTP_USER"] ?>">
+            <input id="destinatario" type="email" placeholder="email destinatario" name="destinatario" required>
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
+            <div class="text-base" contenteditable="true" id="base"></div> 
+            <input type="hidden" name="mensaje" id="mensaje">
             <!-- igual que el texarea -->
 
             <div class="btns">
-                <button type="submit">Enviar</button>
+                <button type="submit" onclick="prepararMensaje();">Enviar</button>
                 <button type="reset">Borrar</button>
             </div>
 
@@ -137,6 +137,15 @@ $dotenv->load();
             <span>Iván</span>
         </div>
     </footer>
+
+    <script>
+        function prepararMensaje() {
+            // Capturamos el contenido del texto-base
+            const mensaje = document.getElementById('base').innerHTML;
+            // Asignamos ese contenido al input oculto que enviara el mensaje
+            document.getElementById('mensaje').value = mensaje;
+        }
+    </script> 
 
 </body>
 
