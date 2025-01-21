@@ -13,7 +13,7 @@ require_once 'bd.class.php';
 
 $rutaAdrian = 'C:/xampp/htdocs/Mailing_APP';
 
-$dotenv = Dotenv::createImmutable($rutaAdrian);
+$dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
 

@@ -1,5 +1,9 @@
 <?php
 session_start();
+// Modificamos el tiempo del servidor, porque a veces corta el programa
+set_time_limit(3600);
+
+
 //* Asignado: David
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email que representa al remitente (el valor sera siempre el mismo)
@@ -14,44 +18,53 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
-require '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
-$dotenv = Dotenv::createInmutable('/opt/lampp/htdocs/Mailing_APP');
+$dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $mensaje = "No empty";
 
     $remitente = $_POST["remitente"];
     $destino = $_POST["destino"];
-    $mensaje = $_POST["mensaje"];
+    $copia = htmlspecialchars($_POST["copia"]);
+    if (isset($_POST["mensaje"])) {
+        $mensaje = $_POST["mensaje"];
+    } 
+
 
     $email = new PHPMailer(true);
 
-    try{
+    try {
+
         //configuracion de phpmailer
         $email->isSMTP();
         $email->SMTPAuth = true;
         $email->SMTPSecure = 'ssl';
-        $email->Port = 465;
+        $email->Port = "465";
 
         //configuracion del servidor SMTP
-        $email->Host = 'smpt.gmail.com'
-        $email->Username = $remitente;
-        $email->Password = 'guqh bvao qcac wnyo';
+        $email->Host = $_ENV["SMTP_HOST"];
+        $email->Username = $_ENV['SMTP_USER'];
+        $email->Password = $_ENV["SMTP_PASS"];
+        $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
         //confiiguracion del mail
-        $email->setFrom($remitente);
+        $email->setFrom($remitente, "Remitente");
         $email->addAddress($destino);
-        $email->Subject = 'PHPMailer Gmail';
+        $email->addCC($copia);
+        $email->Subject = 'Asunto del correo';
         $email->isHTML(true);
         $email->Body = $mensaje;
 
         //funcion que manda el correo
         $email->Send();
         echo 'El mensaje se ha enviado correctamente';
-    }catch (Exception $e){
-        echo 'El mensaje no se ha podido enviar correctamente';
+    } catch (Exception $e) {
+        echo 'El mensaje no se ha podido enviar correctamente, por este motivo: ' . $e->getMessage();
     }
 }
 
@@ -85,10 +98,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         <h2>Enviar correo con copia</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text_CC.php" method="POST">
-            <input type="email" id="remitente" required placeholder="Remitente" name="remitente" ><br>
-            <input type="email" id="destino" required placeholder="Destinatario" name="destino" ><br>
-            <input type="email" id="Copia" required placeholder="Copia" name="copia"><br><br>
-            <div id="text-base" contenteditable="true" placeholder="Mensaje" id="mensaje" name="mensaje" >
+            <input type="email" id="remitente" required placeholder="Remitente" name="remitente">
+            <input type="email" id="destino" required placeholder="Destinatario" name="destino">
+            <input type="email" id="copia" required placeholder="Copia" name="copia">
+            <div id="text-base" contenteditable="true" placeholder="Mensaje" id="mensaje" name="mensaje">
             </div>
             <div class="btns">
                 <button type="submit">Enviar</button>

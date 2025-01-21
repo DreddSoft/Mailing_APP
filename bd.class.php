@@ -6,7 +6,7 @@ use Dotenv\Dotenv;  // Esto es para abrir el archivo .env con la información de
 
 $rutadavid = '/opt/lampp/htdocs/Mailing_APP';
 
-$dotenv = Dotenv::createImmutable($rutadavid);
+$dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
 class bd
