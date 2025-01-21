@@ -7,6 +7,16 @@
 - Usar Bases de datos para verificar los usuarios y las passwords
 */
 
+$show = false;
+
+// Capturamos el get
+if (isset($_GET['mensaje'])) {
+
+    $mensaje = htmlspecialchars($_GET['mensaje']);
+    $show = true;
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -37,19 +47,27 @@
         <h2 class="blue">Login</h2>
         <!-- Aquí va el formulario -->
          <form action="service.php" method="post">
-            <input type="text" name="user" id="user" placeholder="Usuario" required autocomplete="off">
-            <input type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="off">
+            <input type="text" name="user" id="user" placeholder="Usuario" required autocomplete="on">
+            <input type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="on">
 
             <div class="btns">
                 <button type="reset">Borrar</button>
                 <button type="submit">Enviar</button>
             </div>
+
+            <?php if ($show): 
+                global $mensaje; ?>
+                <div class="mensaje">
+                    <p><?= $mensaje ?></p>
+                </div>
+
+            <?php endif; ?>
          </form>
 
     </main>
     <footer>
 
-        <a href="#">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP">Github</a>
         <h2 class="blue">DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>
@@ -63,5 +81,10 @@
     </footer>
 
 </body>
-
+<!-- 
+    Autor: @DreddSoft
+    Proyecto: app_mailing
+    Fecha: Enero de 2025
+    Descripción: Página de inicio y login
+-->
 </html>

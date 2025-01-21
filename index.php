@@ -6,7 +6,7 @@ session_start();
 // Página principal con un mensaje informativo y un menu de enlaces para acceder a cada opción.
 
 // Si no esta el usuario registrado, redirigimos
-if (!$_SESSION['user']) {
+if (!$_SESSION['usuario']) {
 
     header("Location: login.php");
 
@@ -41,12 +41,18 @@ if (!$_SESSION['user']) {
     <main>
 
         <h2>Página Principal</h2>
-        <!-- Aquí va el formulario -->
+         <div class="enlaces">
+            <p>Aqui tiene una serie de enlaces, como en la cabecera para enviar emails</p>
+            <a href="mailing_select.php">Correo Especial</a>
+            <a href="mailing_select_CC.php">Correo Especial Copia</a>
+            <a href="mailing_text.php">Correo</a>
+            <a href="mailing_text_CC.php">Correo Copia</a>
+         </div>
 
     </main>
     <footer>
 
-        <a href="#">Github</a>
+        <a href="https://github.com/DreddSoft/Mailing_APP">Github</a>
         <h2>DAW</h2>
         <div class="equipo">
             <h3>Equipo</h3>
@@ -60,5 +66,12 @@ if (!$_SESSION['user']) {
     </footer>
 
 </body>
+
+<!-- 
+    Autor: @DreddSoft
+    Proyecto: app_mailing
+    Fecha: Enero de 2025
+    Descripción: Página principal de la aplicación de mailing.
+-->
 
 </html>

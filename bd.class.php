@@ -1,12 +1,29 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
+use Dotenv\Dotenv;  // Esto es para abrir el archivo .env con la información delicada
+
+$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/app_mailing');
+$dotenv->load();
+
 class bd
 {
-    private $host = "localhost";
-    private $user = "root";
-    private $pass = "";
-    private $name_database = "mailapp";
+
+    private $host;
+    private $user;
+    private $pass;
+    private $name_database;
     private $conn;
+
+    public function __construct()
+    {
+        // Asignar las variables de entorno a las propiedades
+        $this->host = $_ENV['DB_HOST'];
+        $this->user = $_ENV['DB_USER'];
+        $this->pass = $_ENV['DB_PASS'];
+        $this->name_database = $_ENV['DB_NAME'];
+    }
 
     //* Funcion para conectar la base de datos
     public function conectar()

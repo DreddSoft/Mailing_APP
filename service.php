@@ -29,13 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //* Aqui tendremos que hacer las comprobaciones de bd
         // Consulta SQL
-        $sql = "SELECT id, email, pass FROM usuarios";
+        $sql = "SELECT id, email, pass FROM usuarios WHERE email = '$user'";
 
         // Este es un metodo propio que devuelve un array con los datos
         $dataUsuarios = $bd->capturarDatos($sql);
+        var_dump($dataUsuarios);
 
         // Comprobacion de usuario y contrasenia
-        if (strtolower($user) === strtolower($dataUsuarios['email']) && $pass === $dataUsuarios['pass']) {
+        if (strtolower($user) === strtolower($dataUsuarios[0]['email']) && $pass === $dataUsuarios[0]['pass']) {
+
 
             // crear la sesion de usuario
             $_SESSION['usuario'] = $user;
@@ -59,3 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mensaje = "El metodo de acceso no es correcto.";
     header("Location: login.php?mensaje=$mensaje");
 }
+
+/**
+ * Author: @DreddSoft
+ * Proyect: app_mailing
+ * Date: January 2025
+ * Description: API de servicios y redireccion
+ */
+
+

@@ -142,6 +142,39 @@ main {
             }
         }
     }
+
+    & .enlaces {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        & a {
+
+            text-decoration: none;
+            text-align: center;
+            border: 2px solid $anti-flash-white;
+            border-radius: 4px;
+            background-color: $white-base;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            color: $black;
+            min-width: 200px;
+            letter-spacing: 1px;
+            color: $prusian-blue;
+            transition: 300ms ease-in-out;
+            -webkit-transition: 300ms ease-in-out;
+            -moz-transition: 300ms ease-in-out;
+
+            &:hover {
+                color: $white-base;
+                background-color: $prusian-blue;
+                border: 2px solid $white-base;
+            }
+
+        }
+    }
 }
 
 @import '_footer.scss';
