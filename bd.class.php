@@ -4,7 +4,7 @@ require_once 'vendor/autoload.php';
 
 use Dotenv\Dotenv;  // Esto es para abrir el archivo .env con la información delicada
 
-$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/app_mailing');
+$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
 $dotenv->load();
 
 class bd
