@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //* Asignado: Adrían
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email que representa al remitente (el valor sera siempre el mismo)
