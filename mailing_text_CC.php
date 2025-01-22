@@ -17,17 +17,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
-
+//traigo el contenido de autoload.php (que necesito para que funcione la aplicacion)
 require_once 'vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
-
+//compruebo que el request method es post
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $mensaje = "No empty";
-
+    //si es post, guardo la informacion del formulario (remitente, destinatario, copia, mensaje y asunto) en variables para luego
     $remitente = $_POST["remitente"];
     $destino = $_POST["destino"];
     $copia = htmlspecialchars($_POST["copia"]);
@@ -35,14 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mensaje = $_POST["mensaje"];
     }
 
-    // Controlamos que el usuario haya rellenado el asunto
+    //me aseguro que el usuario ha puesto el asunto
     if (isset($_POST['asunto'])) {
         $asunto = htmlspecialchars($_POST['asunto']);
     } else {
         $asunto = "Mail enviado por Mailing_APP, desarrollada por LosPutosAmos";
     }
 
-
+    //creo el correo que se va a enviar usando phpmailer
     $email = new PHPMailer();
 
     try {
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email->isHTML(true);
         $email->Body = $mensaje;
 
-        //funcion que manda el correo
+        //funcion que manda el correo y muestra un mensaje de error en caso de que haya algun problema
         $email->Send();
         echo 'El mensaje se ha enviado correctamente';
     } catch (Exception $e) {
