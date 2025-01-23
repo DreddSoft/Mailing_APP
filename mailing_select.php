@@ -11,7 +11,7 @@ use Dotenv\Dotenv;
 require_once 'vendor/autoload.php';
 require_once 'bd.class.php';
 
-$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
+$dotenv = Dotenv::createImmutable('../Mailing_APP');
 $dotenv->load();
 
 //* Parte de base de datos
@@ -43,20 +43,16 @@ try {
 // Si el método de envío es POST (esto es una comprobación por seguridad)
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    // Capturamos el remitente y lo guardamos en una variable. No hace falta comprobarla con un condicional porque siempre esta seleccionado
-    $remitente = htmlspecialchars($_POST["remitente"]);
+    $cuerpoEmail ="Hola";
 
     // Capturamos el destinataro, que es obligatorio ponerlo. 
     // Esto lo controlamos con un required en el formulario, o por que es un select
-    $destinatario = htmlspecialchars($_POST["destinatario"]);
+    $destinatario = $_POST["destinatario"];
 
     // Para capturar el asunto y el mensaje, que pueden ir vacíos, hay que envolverlos en un condicional
     if (isset($_POST["mensaje"])) {
-        $mensaje = htmlspecialchars($_POST["mensaje"]);
-    } else {
-        // damos un valor a la variable mensaje
-        $mensaje = "Un saludo.";
-    }
+        $cuerpoEmail = $_POST["mensaje"];
+    } 
 
     if (isset($_POST['asunto'])) {
         $asunto = htmlspecialchars($_POST['asunto']);
@@ -66,8 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mail = new PHPMailer(true);
     //* Aquí empieza el bloque de envío de email, que debe ir envuelto en un try-catch
     try {
-        //* Configuración del servidor
-        $mail->SMTPDebug = 0;                                      
+
+        global $cuerpoEmail;
+        //* Configuración del servidor                                   
         $mail->isSMTP();                                           
         $mail->Host       = $_ENV['SMTP_HOST']; // Variable de entorno para acceder a nuestro host
         $mail->SMTPAuth   = true;                                   // Activa la autenticación SMTP
@@ -78,16 +75,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         //! Ojo, esta línea del puerto, a veces, hay que comentarla por que da error
     
         //* Destinatarios y remitentes
-        $mail->setFrom($_ENV['SMTP_USER'], 'Remitente');
-        $mail->addAddress($destinatario, 'Andres Bonilla');  // Añade un destinatario, el nombre es opcional
-        $mail->addCC($copia); // Línea para añadir cópia, si nuestro ejercicio lleva copia aquí ponemos la variable
-        $mail->addBCC('bcc@example.com');   // Línea para añadir copia oculta.
+        $mail->setFrom($_ENV['SMTP_USER']);
+        $mail->addAddress($destinatario);  // Añade un destinatario, el nombre es opcional
     
         //* Contenido
         $mail->isHTML(true);    // Habilita el contenido tipo HTML
         $mail->Subject = $asunto;   // Asunto del email
-        $mail->Body    = $mensaje;  // Cuerpo del email
-        $mail->AltBody = 'Correo enviado por Mailing_APP';  // Línea de descripción del mensaje
+        $mail->Body = $cuerpoEmail;  // Cuerpo del email
     
         $mail->send();  // Enviar el mensaje
         echo 'Mensaje enviado'; // Echo de comprobación
@@ -136,14 +130,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h2>Enviar Correo a destino seleccionado</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_select.php" method="POST">
-            <input type="email" id="Remitente" required placeholder="Remitente">
-            <input type="email" id="Destinatario" required placeholder="Destinatario">
-            <input type="text" id="Asunto" placeholder="Asunto">
+        <input type="email" id="remitente" value="<?php echo $_ENV['SMTP_USER']; ?>" required placeholder="Remitente">
+            <input type="email" id="destinatario" name="destinatario" required placeholder="Destinatario">
+            <input type="text" id="asunto" name="asunto" placeholder="Asunto">
             <div class="text-base" contenteditable="true" placeholder="Mensaje" id="base">
             </div>
-            <input type="text" hidden="true" id="mensaje">
+            <input type="text" hidden="true" name="mensaje" id="mensaje">
             <div class="btns">
-                <button type="submit">Enviar</button>
+                <button type="submit" onclick="prepararMensaje();">Enviar</button>
                 <button type="reset">Borrar</button>
             </div>
         </form>
