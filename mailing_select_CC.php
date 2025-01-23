@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $asunto = "Envio de mail sin asunto realizado por la aplicación más cañera: Mailing_APP";
     }
 
-    $mail = new PHPMailer(true);
+    $mail = new PHPMailer(true);    
 
     try {
         // Configuración del servidor

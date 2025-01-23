@@ -4,7 +4,7 @@ session_start();
 
 //* Asignado: Andrés
 // Página principal con un mensaje informativo y un menu de enlaces para acceder a cada opción.
-// Porque no se cambia...
+// Porque no se cambia...asdasdsa
 
 // Si no esta el usuario registrado, redirigimos
 if (!$_SESSION['usuario']) {
