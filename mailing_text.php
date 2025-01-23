@@ -18,6 +18,7 @@ $dotenv->load();
 
 
 //* Asignado: Fran
+//* Asignado: Fran
 // Formulario html con:
 // 1. REMITENTE: Un campo input:email
 // 2. DESTINATARIO: Un campo input:email
@@ -110,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <!-- igual que el texarea -->
 
             <div class="btns">
-                <button type="submit">Enviar</button>
+                <button type="submit" onclick="prepararMensaje();">Enviar</button>
                 <button type="reset">Borrar</button>
             </div>
 
@@ -132,6 +133,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <span>Iván</span>
         </div>
     </footer>
+
+    <script>
+        function prepararMensaje() {
+            // Capturamos el contenido del texto-base
+            const mensaje = document.getElementById('base').innerHTML;
+            // Asignamos ese contenido al input oculto que enviara el mensaje
+            document.getElementById('mensaje').value = mensaje;
+        }
+    </script> 
 
 </body>
 

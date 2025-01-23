@@ -129,14 +129,14 @@ main form {
   overflow: hidden;
 }
 main form input {
-  padding: 0.7rem 1.2rem;
+  padding: 0.7rem 1.2rem 0.7rem 2rem;
   color: #0c0c0c;
   border: 1px solid #C0BCB5;
   border-radius: 2px;
   text-align: start;
   font-family: "Montserrat", "Arial";
   min-width: 250px;
-  width: 95%;
+  width: 100%;
 }
 main form input::placeholder {
   color: #C0BCB5;
@@ -144,6 +144,21 @@ main form input::placeholder {
 }
 main form input:focus {
   border: 1px solid transparent;
+}
+main form select {
+  padding: 0.7rem 1.2rem;
+  color: #0c0c0c;
+  border: 1px solid #C0BCB5;
+  border-radius: 2px;
+  text-align: start;
+  font-family: "Montserrat", "Arial";
+  min-width: 250px;
+  width: 100%;
+}
+main form .text-base {
+  width: 100%;
+  height: 400px;
+  padding: 10px 5px 10px 10px;
 }
 main form .btns {
   display: flex;
