@@ -24,16 +24,30 @@ header {
         gap: 1rem;
         height: 70px;
 
-        & a {
+        & ul {
             display: flex;
+            flex-direction: column;
+            justify-content:baseline;
+            align-items: flex-start;
+            color: #5f6368;
+            font-weight: 600;
+            transition: 150ms;
+            padding: 15px;
+            min-width: 200px;
+            cursor: pointer;
+
+        }
+
+        & a {
+            display: block;
             justify-content: center;
             align-items: center;
             color: #5f6368;
             text-decoration: none;
             font-weight: 600;
             cursor: pointer;
-            height: 100%;
-            padding: 0 10px;
+            // height: 100%;
+            padding: 15px;
             border-radius: 6px;
 
             &:hover {

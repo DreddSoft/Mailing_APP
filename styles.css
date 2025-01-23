@@ -75,16 +75,27 @@ header nav {
   gap: 1rem;
   height: 70px;
 }
-header nav a {
+header nav ul {
   display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: flex-start;
+  color: #5f6368;
+  font-weight: 600;
+  transition: 150ms;
+  padding: 15px;
+  min-width: 200px;
+  cursor: pointer;
+}
+header nav a {
+  display: block;
   justify-content: center;
   align-items: center;
   color: #5f6368;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
-  height: 100%;
-  padding: 0 10px;
+  padding: 15px;
   border-radius: 6px;
 }
 header nav a:hover {
@@ -201,6 +212,12 @@ main form textarea {
   padding: 10px 5px 10px 10px;
 }
 main form .mensaje {
+  color: red;
+}
+main form .exito {
+  color: green;
+}
+main form .error {
   color: red;
 }
 main .enlaces {

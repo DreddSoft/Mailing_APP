@@ -16,6 +16,9 @@ $rutaAdrian = 'C:/xampp/htdocs/Mailing_APP';
 $dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
+// Variable vacio
+$showExito = false;
+$showError = false;
 
 // Crear objeto base de datos
 $bd = new bd();
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $asunto = "Envio de mail sin asunto realizado por la aplicación más cañera: Mailing_APP";
     }
 
-    $mail = new PHPMailer(true);    
+    $mail = new PHPMailer(true);
 
     try {
         // Configuración del servidor
@@ -84,9 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->Body = $cuerpoEmail;
 
         $mail->send();
-        echo 'El mensaje ha sido enviado';
+        // echo 'El mensaje ha sido enviado';
+        $exito = $true;
     } catch (Exception $e) {
-        echo "El mensaje no pudo ser enviado. {$mail->ErrorInfo}";
+        // echo "El mensaje no pudo ser enviado. {$mail->ErrorInfo}";
+        $exito = false;
     }
 }
 
@@ -103,18 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 
 <body>
-    <header>
 
-        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
-        <nav>
-            <a href="mailing_select.php">Correo Especial</a>
-            <a href="mailing_select_CC.php">Correo Especial Copia</a>
-            <a href="mailing_text.php">Correo</a>
-            <a href="mailing_text_CC.php">Correo Copia</a>
-        </nav>
-        <h1>Aplicación de Mail</h1>
-
-    </header>
+    <!-- Reutilización de código, incluimos el header en un archivo diferente -->
+    <?php include_once('header.php') ?>
     <main>
 
         <h2>Enviar correo a destino seleccionado con copia</h2>
@@ -143,22 +139,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <button type="submit">Enviar</button>
                 <button type="reset">Borrar</button>
             </div>
+
+            <div class="show">
+                <?php if ($showExito) : ?>
+                    <p class="exito">El mensaje ha sido enviado correctamente</p>
+                <?php elseif ($showError): ?>
+                    <p class="error">El mensaje no pudo ser enviado: <?= $mail->ErrorInfo; ?></p>
+                <?php endif; ?>
+            </div>
+
         </form>
     </main>
-    <footer>
 
-        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
-        <h2>DAW</h2>
-        <div class="equipo">
-            <h3>Equipo</h3>
-            <span>Andrés</span>
-            <span>Adrián</span>
-            <span>David</span>
-            <span>Fran</span>
-            <span>Iván</span>
-        </div>
-
-    </footer>
+    <!-- Reutilización de código, incluimos el footer como componenet -->
+    <?php include_once('footer.php'); ?>
 
 </body>
 

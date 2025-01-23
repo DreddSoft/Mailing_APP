@@ -28,6 +28,9 @@ $dotenv->load();
 // 6. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 
 
+// Variable vacio
+$showExito = false;
+$showError = false;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -55,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Port       = $_ENV["SMTP_PORT"];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom($_ENV["SMTP_USER"] );/*correo del remitente, recuperado del formulario */
+        $mail->setFrom($_ENV["SMTP_USER"]);/*correo del remitente, recuperado del formulario */
         $mail->addAddress($destinatario);/* correo del destinatario, recuperado del formulario*/
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
@@ -63,9 +66,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Body    = $text_base;
 
         $mail->send();
-        echo 'El correo se ha enviado de forma exitosa, su destinatario debe haber recivido el correo';
+        // echo 'El correo se ha enviado de forma exitosa, su destinatario debe haber recivido el correo';
+        $showExito = true;
     } catch (Exception $e) {
-        die("Error: no se puedo enviar de forma correcta el correo. Mailer Error: {$mail->ErrorInfo}");
+        // die("Error: no se puedo enviar de forma correcta el correo. Mailer Error: {$mail->ErrorInfo}");
+        $showError = true;
     }
 }
 
@@ -85,26 +90,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-    <header>
-
-        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
-        <nav>
-            <a href="mailing_select.php">Correo Especial</a>
-            <a href="mailing_select_CC.php">Correo Especial Copia</a>
-            <a href="mailing_text.php">Correo</a>
-            <a href="mailing_text_CC.php">Correo Copia</a>
-        </nav>
-        <h1>Aplicación de Mail</h1>
-
-    </header>
+    <!-- Reutilización de código, incluimos el header en un archivo diferente -->
+    <?php include_once('header.php') ?>
     <main>
 
         <h2>Enviar correo</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text.php" method="post">
-            <input id="remitente" type="email" placeholder="Email remitente" name="remitente" readonly value="<?php echo $_ENV["SMTP_USER"]; ?>"><br>
-            <input id="destinatario" type="email" placeholder="Email destinatario" name="destinatario" required><br>
-            <input id="asunto" type="text" placeholder="Asunto:" name="asunto" required><br>
+            <input id="remitente" type="email" placeholder="Email remitente" name="remitente" readonly value="<?php echo $_ENV["SMTP_USER"]; ?>">
+            <input id="destinatario" type="email" placeholder="Email destinatario" name="destinatario" required>
+            <input id="asunto" type="text" placeholder="Asunto:" name="asunto" required>
 
             <div class="text-base" contenteditable="true" id="base"></div>
             <input type="text" name="mensaje" hidden="true" id="mensaje">
@@ -116,23 +111,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
             <!-- Estructura de sintaxis alternativa, para el lanzamiento del error -->
+            <div class="show">
+                <?php if ($showExito) : ?>
+                    <p class="exito">El mensaje ha sido enviado correctamente</p>
+                <?php elseif ($showError): ?>
+                    <p class="error">El mensaje no pudo ser enviado: <?= $mail->ErrorInfo; ?></p>
+                <?php endif; ?>
+            </div>
 
         </form>
 
     </main>
-    <footer>
-
-        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
-        <h2>DAW</h2>
-        <div class="equipo">
-            <h3>Equipo</h3>
-            <span>Andrés</span>
-            <span>Adrián</span>
-            <span>David</span>
-            <span>Fran</span>
-            <span>Iván</span>
-        </div>
-    </footer>
+    <!-- Reutilización de código, incluimos el footer como componenet -->
+    <?php include_once('footer.php'); ?>
 
     <script>
         function prepararMensaje() {
@@ -141,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Asignamos ese contenido al input oculto que enviara el mensaje
             document.getElementById('mensaje').value = mensaje;
         }
-    </script> 
+    </script>
 
 </body>
 
