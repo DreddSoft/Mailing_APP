@@ -1,4 +1,5 @@
 <?php
+// Usamos la función sesion start para mantener la sesión activa
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -6,10 +7,95 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
+// Nos traemos archivos php necesarios para el funcionamiento
 require_once 'vendor/autoload.php';
+require_once 'bd.class.php';
 
 $dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
 $dotenv->load();
+
+//* Parte de base de datos
+// Creamos objeto de la clase bd
+$bd = new bd();
+
+// Con try-catch controlamos la conexión a la base de datos
+try {
+    // conectamos la bd
+    $bd->conectar();
+
+    // Creamos la sentencia sql
+    $sql = "SELECT email FROM usuarios";
+
+    // Usamos el método de capturarDatos
+    $datos = $bd->capturarDatos($sql);
+
+    // Comprobamos que datos no este vacío
+    if (empty($datos)) {
+        echo "No estas obteniendo datos de la base de datos";
+    }
+} catch (Exception $e) {
+    echo "Ha ocurrido una excepción con la base de datos: " . $e->getMessage();
+} finally {
+    // Cerramos la conexión con la bd
+    $bd->cerrar();
+}
+
+// Si el método de envío es POST (esto es una comprobación por seguridad)
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    // Capturamos el remitente y lo guardamos en una variable. No hace falta comprobarla con un condicional porque siempre esta seleccionado
+    $remitente = htmlspecialchars($_POST["remitente"]);
+
+    // Capturamos el destinataro, que es obligatorio ponerlo. 
+    // Esto lo controlamos con un required en el formulario, o por que es un select
+    $destinatario = htmlspecialchars($_POST["destinatario"]);
+
+    // Para capturar el asunto y el mensaje, que pueden ir vacíos, hay que envolverlos en un condicional
+    if (isset($_POST["mensaje"])) {
+        $mensaje = htmlspecialchars($_POST["mensaje"]);
+    } else {
+        // damos un valor a la variable mensaje
+        $mensaje = "Un saludo.";
+    }
+
+    if (isset($_POST['asunto'])) {
+        $asunto = htmlspecialchars($_POST['asunto']);
+    } else {
+        $asunto = "";
+    }
+    $mail = new PHPMailer(true);
+    //* Aquí empieza el bloque de envío de email, que debe ir envuelto en un try-catch
+    try {
+        //* Configuración del servidor
+        $mail->SMTPDebug = 0;                                      
+        $mail->isSMTP();                                           
+        $mail->Host       = $_ENV['SMTP_HOST']; // Variable de entorno para acceder a nuestro host
+        $mail->SMTPAuth   = true;                                   // Activa la autenticación SMTP
+        $mail->Username   = $_ENV['SMTP_USER']; // Variable de entorno para nuestro usuario, nuestra cuenta de email
+        $mail->Password   = $_ENV['SMTP_PASS']; // Variable de entorno para nuestra contraseña
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
+        $mail->Port       = $_ENV['SMTP_PORT']; // Variable de entorno para el puerto
+        //! Ojo, esta línea del puerto, a veces, hay que comentarla por que da error
+    
+        //* Destinatarios y remitentes
+        $mail->setFrom($_ENV['SMTP_USER'], 'Remitente');
+        $mail->addAddress($destinatario, 'Andres Bonilla');  // Añade un destinatario, el nombre es opcional
+        $mail->addCC($copia); // Línea para añadir cópia, si nuestro ejercicio lleva copia aquí ponemos la variable
+        $mail->addBCC('bcc@example.com');   // Línea para añadir copia oculta.
+    
+        //* Contenido
+        $mail->isHTML(true);    // Habilita el contenido tipo HTML
+        $mail->Subject = $asunto;   // Asunto del email
+        $mail->Body    = $mensaje;  // Cuerpo del email
+        $mail->AltBody = 'Correo enviado por Mailing_APP';  // Línea de descripción del mensaje
+    
+        $mail->send();  // Enviar el mensaje
+        echo 'Mensaje enviado'; // Echo de comprobación
+    } catch (Exception $e) {
+        echo "Mensaje no enviado. Mailer Error: {$mail->ErrorInfo}";    // Echo de error
+    }
+
+}
 
 //* Asignado: Iván
 // Formulario html con:
@@ -50,8 +136,9 @@ $dotenv->load();
         <h2>Enviar Correo a destino seleccionado</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_select.php" method="POST">
-            <input type="email" id="Remitente" required placeholder="Remitente"><br>
-            <input type="email" id="Destinatario" required placeholder="Destinatario"><br>
+            <input type="email" id="Remitente" required placeholder="Remitente">
+            <input type="email" id="Destinatario" required placeholder="Destinatario">
+            <input type="text" id="Asunto" placeholder="Asunto">
             <div id="text-base" contenteditable="true" placeholder="Mensaje">
             </div>
             <div class="btns">
@@ -74,6 +161,16 @@ $dotenv->load();
         </div>
 
     </footer>
+
+    <script>
+        // Esta función se incluye porque el div.text-base no se captura con el envío del formulario, entonces lo que acepmos es asignarle su contenido a un input oculto que hay justo debajo que ese si lo coge el formulario
+        function prepararMensaje() {
+            // Capturamos el contenido del texto-base
+            const mensaje = document.getElementById('base').innerHTML;
+            // Asignamos ese contenido al input oculto que enviara el mensaje
+            document.getElementById('mensaje').value = mensaje;
+        }
+    </script>
 
 </body>
 
