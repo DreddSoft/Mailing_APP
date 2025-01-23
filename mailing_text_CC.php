@@ -17,7 +17,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
-//traigo el contenido de autoload.php (que necesito para que funcione la aplicacion)
+//traigo el contenido de autoload.php y dotenv(que necesito para que funcione la aplicacion)
 require_once 'vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable("../Mailing_APP");
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
 
-        //configuracion de phpmailer
+        //configuracion de phpmailer para que use smtp
         $email->isSMTP();
         $email->SMTPAuth = true;
         $email->SMTPSecure = 'ssl';
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email->Password = $_ENV["SMTP_PASS"];
         $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-        //confiiguracion del mail
+        //confiiguracion del mail, remitente, destinatario...
         $email->setFrom($_ENV['SMTP_USER']);
         $email->addAddress($destino);
         $email->addCC($copia);
