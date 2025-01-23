@@ -139,8 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="email" id="Remitente" required placeholder="Remitente">
             <input type="email" id="Destinatario" required placeholder="Destinatario">
             <input type="text" id="Asunto" placeholder="Asunto">
-            <div id="text-base" contenteditable="true" placeholder="Mensaje">
+            <div class="text-base" contenteditable="true" placeholder="Mensaje" id="base">
             </div>
+            <input type="text" hidden="true" id="mensaje">
             <div class="btns">
                 <button type="submit">Enviar</button>
                 <button type="reset">Borrar</button>
