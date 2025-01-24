@@ -24,7 +24,7 @@ if (isset($_GET['mensaje'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
     <title>Mail_APP</title>
 </head>
 
