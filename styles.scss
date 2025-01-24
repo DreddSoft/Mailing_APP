@@ -188,6 +188,14 @@ main {
         & .mensaje {
            color: red;
         }
+
+        & .exito {
+            color: green;
+        }
+
+        & .error {
+            color: red;
+        }
     }
 
     & .enlaces {
@@ -222,6 +230,10 @@ main {
 
         }
     }
+}
+
+.hidden {
+    display: none;
 }
 
 @import '_footer.scss';

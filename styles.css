@@ -53,7 +53,7 @@ h4 {
 header {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
@@ -63,29 +63,49 @@ header {
   box-shadow: 3px 0 8px rgb(212, 212, 212);
   padding: 1rem 1rem;
 }
+header .left-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
 header img {
-  border-radius: 10px;
   width: 150px;
+  margin-right: 15px;
 }
 header nav {
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   height: 70px;
 }
+header nav ul {
+  display: block;
+  list-style: none;
+  position: absolute;
+  padding: 0;
+  top: 0;
+  right: 0;
+  backdrop-filter: blur(2px);
+  transform: translate(0, 20%);
+}
 header nav a {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   color: #5f6368;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
-  height: 100%;
-  padding: 0 10px;
+  min-width: 150px;
+  padding: 15px;
   border-radius: 6px;
+  transition: 150ms ease-in-out;
+  -webkit-transition: 150ms ease-in-out;
+  -moz-transition: 150ms ease-in-out;
 }
 header nav a:hover {
   color: #202124;
@@ -203,6 +223,12 @@ main form textarea {
 main form .mensaje {
   color: red;
 }
+main form .exito {
+  color: green;
+}
+main form .error {
+  color: red;
+}
 main .enlaces {
   display: flex;
   flex-direction: column;
@@ -232,6 +258,10 @@ main .enlaces a:hover {
   border: 2px solid #fff;
 }
 
+.hidden {
+  display: none;
+}
+
 footer {
   display: flex;
   flex-direction: row;
@@ -243,6 +273,10 @@ footer {
   color: #0c0c0c;
 }
 footer a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   color: #1c2321;
   font-family: "Montserrat", "Arial";
@@ -253,6 +287,10 @@ footer a {
 footer a:hover {
   border-bottom: 1px solid #D0B17A;
   color: #D0B17A;
+}
+footer a img {
+  width: 25px;
+  margin-right: 5px;
 }
 footer .equipo {
   display: flex;

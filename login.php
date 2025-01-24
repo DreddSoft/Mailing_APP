@@ -24,22 +24,18 @@ if (isset($_GET['mensaje'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
     <title>Mail_APP</title>
 </head>
 
 <body>
     <header>
-
-        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
-        <nav style="display:none;">
-            <a href="mailing_select.php">Correo Especial</a>
-            <a href="mailing_select_CC.php">Correo Especial Copia</a>
-            <a href="mailing_text.php">Correo</a>
-            <a href="mailing_text_CC.php">Correo Copia</a>
-        </nav>
-        <h1 class="blue">Aplicación de Mail</h1>
-
+        <div class="left-header">
+            <a href="index.php"><img src="assets/logo_mailing_app.svg" alt="Logo"></a>
+        </div>
+        <div class="right-header">
+            <h1>Aplicación de Mail</h1>
+        </div>
     </header>
     <main>
 
