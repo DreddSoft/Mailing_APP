@@ -1,4 +1,4 @@
-# <img src="assets/logo_mailing_app.png" /> Proyecto Mailing_APP
+# <img src="assets/logo_mailing_app.svg" /> Proyecto Mailing_APP
 
 **Versión 1:** Desarrollo de una aplicación de mailing con varias opciones de envío de email predefinidas.
 
