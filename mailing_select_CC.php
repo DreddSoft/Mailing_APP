@@ -13,9 +13,18 @@ require_once 'bd.class.php';
 
 $rutaAdrian = 'C:/xampp/htdocs/Mailing_APP';
 
-$dotenv = Dotenv::createImmutable($rutaAdrian);
+$dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
+// Si no esta el usuario registrado, redirigimos
+if (!$_SESSION['usuario']) {
+
+    header("Location: login.php");
+}
+
+// Variable vacio
+$showExito = false;
+$showError = false;
 
 // Crear objeto base de datos
 $bd = new bd();
@@ -48,10 +57,24 @@ try {
 // Faltan poner mas bonitos los mensajes de confirmación y de error.
 // holaa
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $remitente = $_POST['remitente'];
-    $destinatario = $_POST['destinatario'];
-    $copia = $_POST['copia'];
-    $cuerpoEmail = $_POST['cuerpo'];
+
+    $destinatario = htmlspecialchars($_POST['destinatario']);
+    $copia = htmlspecialchars($_POST['copia']);
+
+    // Condicional para controlar el cuerpo del email
+    if ($_POST['cuerpo']) {
+        $cuerpoEmail = htmlspecialchars($_POST['cuerpo']);
+    } else {
+        $cuerpoEmail = "Texto vacío";
+    }
+
+
+    // Condicional para controlar que no haya error con el asunto
+    if ($_POST['asunto']) {
+        $asunto = htmlspecialchars($_POST['asunto']);
+    } else {
+        $asunto = "Envio de mail sin asunto realizado por la aplicación más cañera: Mailing_APP";
+    }
 
     $mail = new PHPMailer(true);
 
@@ -65,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
         // Remitente y destinatarios
-        $mail->setFrom($remitente, 'Remitente');
+        $mail->setFrom($_ENV['SMTP_USER']);
         $mail->addAddress($destinatario);
         if (!empty($copia)) {
             $mail->addCC($copia);
@@ -73,13 +96,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Contenido del correo
         $mail->isHTML(true);
-        $mail->Subject = 'Asunto del correo';
+        $mail->Subject = $asunto;
         $mail->Body = $cuerpoEmail;
+        $mail->CharSet = 'UTF-8';
 
         $mail->send();
-        echo 'El mensaje ha sido enviado';
+        // echo 'El mensaje ha sido enviado';
+        $showExito = true;
     } catch (Exception $e) {
-        echo "El mensaje no pudo ser enviado. {$mail->ErrorInfo}";
+        // echo "El mensaje no pudo ser enviado. {$mail->ErrorInfo}";
+        $showError = true;
     }
 }
 
@@ -91,65 +117,58 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/new-php-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
     <title>Mailing Select CC</title>
 </head>
 
 <body>
-    <header>
 
-        <a href="index.php"><img src="assets/new-php-logo.png" alt="Logo de PHP"></a>
-        <nav>
-            <a href="mailing_select.php">Correo Especial</a>
-            <a href="mailing_select_CC.php">Correo Especial Copia</a>
-            <a href="mailing_text.php">Correo</a>
-            <a href="mailing_text_CC.php">Correo Copia</a>
-        </nav>
-        <h1>Aplicación de Mail</h1>
-
-    </header>
+    <!-- Reutilización de código, incluimos el header en un archivo diferente -->
+    <?php include_once('header.php') ?>
     <main>
 
         <h2>Enviar correo a destino seleccionado con copia</h2>
         <!-- Aquí va el formulario -->
         <form method="post">
-            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente" value="<?php echo "ajimvil713@gmail.com" ?>" readonly>
+            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" readonly>
 
             <select name="destinatario" id="destinatario">
-                <?php foreach($datos as $dato): ?>
-                <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
+                <?php foreach ($datos as $dato): ?>
+                    <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
                 <?php endforeach; ?>
             </select>
 
             <select name="copia" id="copia">
-                <?php foreach($datos as $dato): ?>
-                <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
+                <?php foreach ($datos as $dato): ?>
+                    <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
                 <?php endforeach; ?>
             </select>
 
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
+
             <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje" require></textarea>
- 
+
 
             <div class="btns">
                 <button type="submit">Enviar</button>
                 <button type="reset">Borrar</button>
             </div>
+
+            <div class="show">
+                <?php if ($showExito) : ?>
+                    <p class="exito">El mensaje ha sido enviado correctamente</p>
+                <?php elseif ($showError): ?>
+                    <p class="error">El mensaje no pudo ser enviado: <?= $mail->ErrorInfo; ?></p>
+                <?php endif; ?>
+            </div>
+
         </form>
     </main>
-    <footer>
 
-        <a href="https://github.com/DreddSoft/Mailing_APP" target="_blank">Github</a>
-        <h2>DAW</h2>
-        <div class="equipo">
-            <h3>Equipo</h3>
-            <span>Andrés</span>
-            <span>Adrián</span>
-            <span>David</span>
-            <span>Fran</span>
-            <span>Iván</span>
-        </div>
+    <!-- Reutilización de código, incluimos el footer como componenet -->
+    <?php include_once('footer.php'); ?>
 
-    </footer>
+    <script src="script.js"></script>
 
 </body>
 
