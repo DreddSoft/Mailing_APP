@@ -9,7 +9,7 @@
 // - GETTERS y SETTERS
 
 
-// se usa requiere.once("empleado.php")
+// se usa requiere.once("empleado.php") a
 
 
 
