@@ -27,7 +27,7 @@ $dotenv->load();
 // 5. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // 6. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 
-
+//
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         //Server settings
-        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        2                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = $_ENV["SMTP_HOST"];                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
