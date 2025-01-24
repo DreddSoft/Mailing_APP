@@ -18,9 +18,10 @@ class EmpleadoRemoto extends Empleado{
 
     private $horasConexion;
 
-    public function __construct($horasConexion)
-    {
+    public function __construct($horasConexion,$edad,$id,$salario){
+        parent::__construct($edad,$id,$salario);
         $this->horasConexion = $horasConexion;
+
     }
 
     public function __getHoraConexion()
