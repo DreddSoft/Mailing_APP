@@ -16,6 +16,12 @@ $rutaAdrian = 'C:/xampp/htdocs/Mailing_APP';
 $dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
+// Si no esta el usuario registrado, redirigimos
+if (!$_SESSION['usuario']) {
+
+    header("Location: login.php");
+}
+
 // Variable vacio
 $showExito = false;
 $showError = false;
@@ -51,10 +57,17 @@ try {
 // Faltan poner mas bonitos los mensajes de confirmación y de error.
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $remitente = $_POST['remitente'];
-    $destinatario = $_POST['destinatario'];
-    $copia = $_POST['copia'];
-    $cuerpoEmail = $_POST['cuerpo'];
+
+    $destinatario = htmlspecialchars($_POST['destinatario']);
+    $copia = htmlspecialchars($_POST['copia']);
+
+    // Condicional para controlar el cuerpo del email
+    if ($_POST['cuerpo']) {
+        $cuerpoEmail = htmlspecialchars($_POST['cuerpo']);
+    } else {
+        $cuerpoEmail = "Texto vacío";
+    }
+
 
     // Condicional para controlar que no haya error con el asunto
     if ($_POST['asunto']) {
@@ -75,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
         // Remitente y destinatarios
-        $mail->setFrom($remitente, 'Remitente');
+        $mail->setFrom($_ENV['SMTP_USER']);
         $mail->addAddress($destinatario);
         if (!empty($copia)) {
             $mail->addCC($copia);
@@ -85,13 +98,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->isHTML(true);
         $mail->Subject = $asunto;
         $mail->Body = $cuerpoEmail;
+        $mail->CharSet = 'UTF-8';
 
         $mail->send();
         // echo 'El mensaje ha sido enviado';
-        $exito = $true;
+        $showExito = true;
     } catch (Exception $e) {
         // echo "El mensaje no pudo ser enviado. {$mail->ErrorInfo}";
-        $exito = false;
+        $showError = true;
     }
 }
 
@@ -130,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <?php endforeach; ?>
             </select>
 
-            <input type="text" name="asunto" id="asunto">
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
 
             <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje" require></textarea>
 

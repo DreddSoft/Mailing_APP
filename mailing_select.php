@@ -14,8 +14,12 @@ require_once 'bd.class.php';
 $dotenv = Dotenv::createImmutable('../Mailing_APP');
 $dotenv->load();
 
-//* Parte de base de datos
-// Creamos objeto de la clase bd
+// Si no esta el usuario registrado, redirigimos
+if (!$_SESSION['usuario']) {
+
+    header("Location: login.php");
+}
+
 $bd = new bd();
 
 // Con try-catch controlamos la conexión a la base de datos
@@ -29,6 +33,8 @@ try {
     // Usamos el método de capturarDatos
     $datos = $bd->capturarDatos($sql);
 
+    // var_export($datos);
+
     // Comprobamos que datos no este vacío
     if (empty($datos)) {
         echo "No estas obteniendo datos de la base de datos";
@@ -39,6 +45,7 @@ try {
     // Cerramos la conexión con la bd
     $bd->cerrar();
 }
+
 
 // Variable vacio
 $showExito = false;
@@ -86,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->isHTML(true);    // Habilita el contenido tipo HTML
         $mail->Subject = $asunto;   // Asunto del email
         $mail->Body = $cuerpoEmail;  // Cuerpo del email
+        $mail->CharSet = 'UTF-8';
 
         $mail->send();  // Enviar el mensaje
         $showExito = true;
@@ -127,7 +135,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <!-- Aquí va el formulario -->
         <form action="mailing_select.php" method="POST">
             <input type="email" id="remitente" value="<?php echo $_ENV['SMTP_USER']; ?>" required placeholder="Remitente">
-            <input type="email" id="destinatario" name="destinatario" required placeholder="Destinatario">
+
+            <select name="destinatario" id="destinatario">
+                <?php foreach($datos as $data): ?>
+
+                    <option value="<?php echo $data['email']; ?>"><?php echo $data['email']; ?></option>
+
+                <?php endforeach; ?>
+
+            </select>
             <input type="text" id="asunto" name="asunto" placeholder="Asunto">
             <div class="text-base" contenteditable="true" placeholder="Mensaje" id="base">
             </div>

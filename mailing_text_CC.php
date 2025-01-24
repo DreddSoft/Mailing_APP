@@ -23,6 +23,12 @@ require_once 'vendor/autoload.php';
 $dotenv = Dotenv::createImmutable("../Mailing_APP");
 $dotenv->load();
 
+// Si no esta el usuario registrado, redirigimos
+if (!$_SESSION['usuario']) {
+
+    header("Location: login.php");
+}
+
 // Variable vacio
 $showExito = false;
 $showError = false;
@@ -68,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email->addAddress($destino);
         $email->addCC($copia);
         $email->Subject = $asunto;
+        $email->CharSet = 'UTF-8';
         $email->isHTML(true);
         $email->Body = $mensaje;
 

@@ -14,6 +14,11 @@ require_once 'vendor/autoload.php';
 $dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
 $dotenv->load();
 
+// Si no esta el usuario registrado, redirigimos
+if (!$_SESSION['usuario']) {
+
+    header("Location: login.php");
+}
 
 
 
@@ -40,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $destinatario = $_POST["destinatario"];
     $text_base = $_POST["mensaje"];
-    $asunto = $_POST["asunto"];
+    $asunto = htmlspecialchars($_POST["asunto"]);
     require 'vendor/autoload.php';
 
     //Create an instance; passing `true` enables exceptions
@@ -64,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = $asunto;
         $mail->Body    = $text_base;
+        $mail->CharSet = 'UTF-8';
 
         $mail->send();
         // echo 'El correo se ha enviado de forma exitosa, su destinatario debe haber recivido el correo';
