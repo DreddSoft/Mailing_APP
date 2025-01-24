@@ -14,8 +14,7 @@
 
 
 require_once("empleado.class.php");
-class EmpleadoRemoto
-{
+class EmpleadoRemoto extends Empleado{
 
     private $horasConexion;
 
