@@ -46,7 +46,7 @@ try {
 // ✅ 6. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // ✅ 7. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
 // Faltan poner mas bonitos los mensajes de confirmación y de error.
-
+// holaa
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $remitente = $_POST['remitente'];
     $destinatario = $_POST['destinatario'];
