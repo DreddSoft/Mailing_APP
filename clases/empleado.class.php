@@ -24,25 +24,25 @@
             return "$this->id" . "$this->nombre" . "$this->edad" . "$this->salario";
         }
         //getters y setters para todos los atributos de empleado
-        public function getId{
+        public function getId(){
             return $this->id;
         }
         public function setId($id){
             $this->id = $id;
         }
-        public function getNombre{
+        public function getNombre(){
             return $this->nombre;
         }
         public function setNombre($nombre){
             $this->nombre = $nombre;
         }
-        public function getEdad{
+        public function getEdad(){
             return $this->edad;
         }
         public function setEdad($edad){
             $this->edad = $edad;
         }
-        public function getSalario{
+        public function getSalario(){
             return $this->salario;
         }
         public function setSalario($salario){
