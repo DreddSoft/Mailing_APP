@@ -10,6 +10,10 @@ footer {
 
 
     & a {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         text-decoration: none;
         color: $eerie-black;
         font-family: $font-title;
@@ -20,6 +24,11 @@ footer {
         &:hover {
             border-bottom: 1px solid $ecru;
             color: $ecru;
+
+        }
+
+        & img {
+            width: 25px;margin-right: 5px;
         }
 
     }
