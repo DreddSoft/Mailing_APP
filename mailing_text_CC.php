@@ -13,11 +13,12 @@ set_time_limit(3600);
 // 5. El formulario tiene que tener 2 botones: 1 de envío y otro de reset
 // 6. Cuando se pulse el botón enviar debe enviar un email usando PHP Mailer, tal y como hemos dado en clase
 // 7. En caso de enviar el mail, tiene que mostrar un mensaje informativo, y si no lo envía, un mensaje de error
+//saca
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
-//traigo el contenido de autoload.php (que necesito para que funcione la aplicacion)
+//traigo el contenido de autoload.php y dotenv(que necesito para que funcione la aplicacion)
 require_once 'vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable("../Mailing_APP");
@@ -57,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
 
-        //configuracion de phpmailer
+        //configuracion de phpmailer para que use smtp
         $email->isSMTP();
         $email->SMTPAuth = true;
         $email->SMTPSecure = 'ssl';
@@ -69,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email->Password = $_ENV["SMTP_PASS"];
         $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-        //confiiguracion del mail
+        //confiiguracion del mail, remitente, destinatario...
         $email->setFrom($_ENV['SMTP_USER']);
         $email->addAddress($destino);
         $email->addCC($copia);
