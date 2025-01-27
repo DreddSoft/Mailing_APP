@@ -18,9 +18,8 @@ class Encargado extends Empleado {
 
     // Constructor
     public function __construct($id, $nombre, $edad, $salario, $rango, $incrementoSalarial) {
-        parent::__construct($id, $nombre, $edad, $salario);
+        parent::__construct($id, $nombre, $edad, $salario + $incrementoSalarial);
         $this->rango = $rango;
-        $this->incrementoSalarial = $incrementoSalarial;
     }
 
     // Metodo mostrarDatos que muestra todos los datos del empleado

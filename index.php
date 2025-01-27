@@ -30,14 +30,9 @@ if (!$_SESSION['usuario']) {
     <?php include_once('header.php'); ?>
     <main>
 
-        <h2>Página Principal</h2>
-        <div class="enlaces">
-            <p>Aqui tiene una serie de enlaces, como en la cabecera para enviar emails</p>
-            <a href="mailing_select.php">Correo Especial</a>
-            <a href="mailing_select_CC.php">Correo Especial Copia</a>
-            <a href="mailing_text.php">Correo</a>
-            <a href="mailing_text_CC.php">Correo Copia</a>
-        </div>
+        <h2 class="blue">Página Principal</h2>
+        <h3 class="blue">Bienvenido a M_APP</h3>
+        <h4 class="blue"><?= $_SESSION['usuario'] ?></h4>
 
     </main>
     <?php include_once('footer.php'); ?>

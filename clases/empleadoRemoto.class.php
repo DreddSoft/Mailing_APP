@@ -36,6 +36,11 @@ class EmpleadoRemoto extends Empleado{
 
     public function mostrarDatos()
     {
+        return parent::mostrarDatos();
+    }
+
+    public function trabajado()
+    {
         return "Tus horas de trabajo como esclavo son: " . $this->__getHoraConexion();
     }
 }

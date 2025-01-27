@@ -19,7 +19,7 @@
             $this->salario = $salario;
         }
         //funcion que muestra todos los datos de un empleado
-        public function mostarDatos(){
+        public function mostrarDatos(){
 
             return $this->nombre . " " . $this->edad . " " . $this->salario;
         }

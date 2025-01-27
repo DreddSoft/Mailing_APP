@@ -82,13 +82,15 @@ header nav {
   gap: 1rem;
   height: 70px;
 }
+header nav .vertical {
+  display: flex;
+  flex-direction: column;
+}
 header nav ul {
   display: block;
   list-style: none;
   position: absolute;
   padding: 0;
-  top: 0;
-  right: 0;
   backdrop-filter: blur(2px);
   transform: translate(0, 20%);
 }
