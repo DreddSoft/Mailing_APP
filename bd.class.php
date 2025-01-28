@@ -1,12 +1,11 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/vendor/autoload.php');
 
 use Dotenv\Dotenv;  // Esto es para abrir el archivo .env con la información delicada
 
-$rutadavid = '/opt/lampp/htdocs/Mailing_APP';
 
-$dotenv = Dotenv::createImmutable("../Mailing_APP");
+$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP');
 $dotenv->load();
 
 class bd

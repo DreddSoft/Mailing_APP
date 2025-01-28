@@ -6,20 +6,18 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
-
+ 
 // Nos traemos estos documentos al completo
-require_once 'vendor/autoload.php';
-require_once 'bd.class.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
 
-$rutaAdrian = 'C:/xampp/htdocs/Mailing_APP';
-
-$dotenv = Dotenv::createImmutable("../Mailing_APP");
+$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP');
 $dotenv->load();
 
 // Si no esta el usuario registrado, redirigimos
 if (!$_SESSION['usuario']) {
 
-    header("Location: login.php");
+    header("Location: Mailing_APP/login.php");
 }
 
 // Variable vacio
@@ -116,15 +114,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../assets/logo_simple.png" type="image/x-icon">
     <title>Mailing Select CC</title>
 </head>
 
 <body>
 
     <!-- Reutilización de código, incluimos el header en un archivo diferente -->
-    <?php include_once('header.php') ?>
+    <?php include_once('../header.php') ?>
     <main>
 
         <h2>Enviar correo a destino seleccionado con copia</h2>
@@ -166,9 +164,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </main>
 
     <!-- Reutilización de código, incluimos el footer como componenet -->
-    <?php include_once('footer.php'); ?>
+    <?php include_once('../footer.php'); ?>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 
 </body>
 

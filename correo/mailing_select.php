@@ -7,11 +7,11 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
-// Nos traemos archivos php necesarios para el funcionamiento
-require_once 'vendor/autoload.php';
-require_once 'bd.class.php';
+// Nos traemos estos documentos al completo
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
 
-$dotenv = Dotenv::createImmutable('../Mailing_APP');
+$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP');
 $dotenv->load();
 
 // Si no esta el usuario registrado, redirigimos
@@ -121,15 +121,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../assets/logo_simple.png" type="image/x-icon">
     <title>Mailing Select</title>
 </head>
 
 <body>
 
     <!-- Reutilización de código, incluimos el header en un archivo diferente -->
-    <?php include_once('header.php') ?>
+    <?php include_once('../header.php') ?>
     <main>
 
         <h2>Enviar Correo a destino seleccionado</h2>
@@ -163,9 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </form>
     </main>
     <!-- Reutilización de código, incluimos el footer como componenet -->
-    <?php include_once('footer.php'); ?>
+    <?php include_once('../footer.php'); ?>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 
 </body>
 

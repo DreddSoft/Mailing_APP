@@ -18,10 +18,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
-//traigo el contenido de autoload.php y dotenv(que necesito para que funcione la aplicacion)
-require_once 'vendor/autoload.php';
 
-$dotenv = Dotenv::createImmutable("../Mailing_APP");
+// Nos traemos estos documentos al completo
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
+
+$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP');
 $dotenv->load();
 
 // Si no esta el usuario registrado, redirigimos
@@ -96,14 +98,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../assets/logo_simple.png" type="image/x-icon">
     <title>Mailing Text CC</title>
 </head>
 
 <body>
     <!-- Reutilización de código, incluimos el header en un archivo diferente -->
-    <?php include_once('header.php') ?>
+    <?php include_once('../header.php') ?>
     <main>
 
         <h2>Enviar correo con copia</h2>
@@ -129,9 +131,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </main>
     <!-- Reutilización de código, incluimos el footer como componenet -->
-    <?php include_once('footer.php'); ?>
+    <?php include_once('../footer.php'); ?>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 
 </body>
 

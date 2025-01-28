@@ -8,10 +8,12 @@ use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
 
-require_once 'vendor/autoload.php';
+// Nos traemos estos documentos al completo
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
 
 
-$dotenv = Dotenv::createImmutable('C:/xampp/htdocs/Mailing_APP');
+$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP');
 $dotenv->load();
 
 // Si no esta el usuario registrado, redirigimos
@@ -46,14 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $destinatario = $_POST["destinatario"];
     $text_base = $_POST["mensaje"];
     $asunto = htmlspecialchars($_POST["asunto"]);
-    require 'vendor/autoload.php';
 
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
 
     try {
-        //Server settings
-        2                      //Enable verbose debug output
+        //Server settings               
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = $_ENV["SMTP_HOST"];                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -90,14 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="assets/logo_simple.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../assets/logo_simple.png" type="image/x-icon">
     <title>Mailing Text</title>
 </head>
 
 <body>
     <!-- Reutilización de código, incluimos el header en un archivo diferente -->
-    <?php include_once('header.php') ?>
+    <?php include_once('../header.php') ?>
     <main>
 
         <h2>Enviar correo</h2>
@@ -129,9 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     </main>
     <!-- Reutilización de código, incluimos el footer como componenet -->
-    <?php include_once('footer.php'); ?>
+    <?php include_once('../footer.php'); ?>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 
 </body>
 

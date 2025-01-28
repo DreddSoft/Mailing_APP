@@ -1,42 +1,73 @@
+<?php
+
+// Capturamos el nombre del archivo
+$filename = basename($_SERVER['PHP_SELF']);
+
+// Si es el index o el login, que están en la carpeta padre
+if ($filename == "index.php" || $filename == "login.php") {
+    // La ruta relativa es esta
+    $ruta = "./";
+} else {    // Cualquier otra
+    // La ruta relativa es esta
+    $ruta = "../";
+}
+
+?>
 <header>
 
     <div class="left-header">
-        <a href="index.php"><img src="assets/logo_mailing_app.svg" alt="Logo"></a>
+        <a href="<?= $ruta ?>/index.php"><img src="<?= $ruta ?>assets/logo_mailing_app.svg" alt="Logo"></a>
         <nav>
             <div class="vertical">
-                <a href="#" class="cabecera" id="1" onclick="mostrarSubmenu(this.id);">Mailing</a>
+                <a href="#" class="cabecera" id="1" onclick="mostrarSubmenu(this.id);">Correo</a>
                 <ul id="submenu1" class="hidden">
                     <li></li>
-                    <li><a href="mailing_select.php">Correo Especial</a></li>
-                    <li><a href="mailing_select_CC.php">Correo Especial Copia</a></li>
-                    <li><a href="mailing_text.php">Correo</a></li>
-                    <li><a href="mailing_text_CC.php">Correo Copia</a></li>
+                    <li><a href="<?= $ruta ?>correo/mailing_select.php">Seleccionado</a></li>
+                    <li><a href="<?= $ruta ?>correo/mailing_select_CC.php">Seleccionado BCC</a></li>
+                    <li><a href="<?= $ruta ?>correo/mailing_text.php">Normal</a></li>
+                    <li><a href="<?= $ruta ?>correo/mailing_text_CC.php">Normal BCC</a></li>
                 </ul>
             </div>
 
             <!-- Funcionalidad para empleado que debe ser -->
             <div class="vertical">
-                <a href="#" class="cabecera" id="2" onclick="mostrarSubmenu(this.id);">Administración</a>
+                <a href="#" class="cabecera" id="2" onclick="mostrarSubmenu(this.id);">Gestión Empleados</a>
                 <ul id="submenu2" class="hidden">
                     <li></li>
-                    <li><a href="./administracion/verEmpleados.php">Ver Empleados</a></li>
-                    <li><a href="#">Crear Empleado</a></li>
-                    <li><a href="#">Eliminar Empleado</a></li>
+                    <li><a href="<?= $ruta ?>gestion/listadoEmpleados.php">Listado</a></li>
+                    <li><a href="#">Añadir</a></li>
+                    <li><a href="#">Editar</a></li>
+                    <li><a href="#">Eliminar</a></li>
                 </ul>
             </div>
 
 
             <div class="vertical">
-                <a href="#" class="cabecera" id="3" onclick="mostrarSubmenu(this.id);">Super</a>
+                <a href="#" class="cabecera" id="3" onclick="mostrarSubmenu(this.id);">Departamentos</a>
                 <ul id="submenu3" class="hidden">
                     <li></li>
-                    <li><a href="#">Ver Usuarios</a></li>
-                    <li><a href="#">Crear Usuarios</a></li>
-                    <li><a href="#">Eliminar Usuarios</a></li>
+                    <li><a href="#">Listado</a></li>
+                    <li><a href="#">Crear</a></li>
+                    <li><a href="#">Editar</a></li>
                 </ul>
             </div>
 
 
+            <!-- <?php //if ($usuario['super']) : 
+                    ?>
+                <div class="vertical">
+                    <a href="#" class="cabecera" id="3" onclick="mostrarSubmenu(this.id);">Super</a>
+                    <ul id="submenu3" class="hidden">
+                        <li></li>
+                        <li><a href="#">Lista de usuarios</a></li>
+                        <li><a href="#">Añadir usuario</a></li>
+                        <li><a href="#">Editar usuario</a></li>
+                        <li><a href="#">Eliminar usuario</a></li>
+                    </ul>
+                </div>
+
+            <?php //endif; 
+            ?> -->
 
         </nav>
     </div>
