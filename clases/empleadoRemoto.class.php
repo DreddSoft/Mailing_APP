@@ -18,18 +18,18 @@ class EmpleadoRemoto extends Empleado{
 
     private $horasConexion;
 
-    public function __construct($horasConexion,$edad,$id,$salario){
-        parent::__construct($edad,$id,$salario);
+    public function __construct($nombre, $edad, $salario, $horasConexion){
+        parent::__construct($nombre, $edad, $salario);
         $this->horasConexion = $horasConexion;
 
     }
 
-    public function __getHoraConexion()
+    public function getHoraConexion()
     {
         return $this->horasConexion;
     }
 
-    public function __setHoraConexion($horasConect)
+    public function setHoraConexion($horasConect)
     {
         $this->horasConexion = $horasConect;
     }
@@ -41,6 +41,6 @@ class EmpleadoRemoto extends Empleado{
 
     public function trabajado()
     {
-        return "Tus horas de trabajo como esclavo son: " . $this->__getHoraConexion();
+        return "Tus horas de trabajo como esclavo son: " . $this->getHoraConexion();
     }
 }

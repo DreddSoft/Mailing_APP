@@ -25,3 +25,9 @@ function prepararMensaje() {
     // Asignamos ese contenido al input oculto que enviara el mensaje
     document.getElementById('mensaje').value = mensaje;
 }
+
+function editarEmpleado(id) {
+
+    window.open(`editarEmpleado.php?id=${id}`, "_blank");
+    
+}

@@ -29,7 +29,10 @@ try {
 
     $bd->conectar();
 
-    $sql = "SELECT id, nombre, edad, salario, oficina, rango FROM empleados";
+    $sql = "SELECT E.id, E.nombre, E.edad, E.salario, E.oficina, E.rango, D.nombre AS nombreDpto
+    FROM empleados AS E 
+    LEFT JOIN departamentos AS D ON D.id = E.idDpto
+    ORDER BY salario";
 
     $empleados = $bd->capturarDatos($sql);
 
@@ -52,7 +55,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../assets/logo_simple.png" type="image/x-icon">
-    <title>Mailing Select CC</title>
+    <title>Listado Empleados</title>
 </head>
 
 <body>
@@ -71,11 +74,11 @@ try {
                 <th>Salario</th>
                 <th>Oficina</th>
                 <th>Encargado</th>
+                <th>Departamento</th>
             </tr>
 
             <?php foreach ($empleados as $empleado) : ?>
-                <tr>
-                    <td class="hidden" id="idEmp"><?= $empleado['id']; ?></td>
+                <tr id="<?= $empleado['id']; ?>" ondblclick="editarEmpleado(this.id)">
                     <td><?= $empleado['nombre']; ?></td>
                     <td><?= $empleado['edad']; ?></td>
                     <td><?= $empleado['salario']; ?> &euro;</td>
@@ -93,6 +96,7 @@ try {
                             NO
                         <?php endif; ?>
                     </td>
+                    <td><?= $empleado['nombreDpto']; ?></td>
                 </tr>
 
             <?php endforeach; ?>

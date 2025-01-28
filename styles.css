@@ -150,6 +150,9 @@ main form {
   width: 600px;
   overflow: hidden;
 }
+main form label {
+  margin: 1rem 0;
+}
 main form input {
   padding: 0.7rem 1.2rem 0.7rem 2rem;
   color: #0c0c0c;
@@ -258,6 +261,129 @@ main .enlaces a:hover {
   color: #fff;
   background-color: #173753;
   border: 2px solid #fff;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #C0BCB5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 3px #C0BCB5;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  width: 600px;
+  overflow: hidden;
+}
+.form2 p {
+  text-align: center;
+}
+.form2 button {
+  border: 2px solid #C0BCB5;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  color: #0c0c0c;
+  min-width: 100px;
+  letter-spacing: 1px;
+  color: #173753;
+  transition: 300ms ease-in-out;
+  -webkit-transition: 300ms ease-in-out;
+  -moz-transition: 300ms ease-in-out;
+}
+.form2 button:hover {
+  color: #fff;
+  background-color: #173753;
+  border: 2px solid #fff;
+}
+.form2 button:active {
+  transform: translateY(3px);
+  -webkit-transform: translateY(3px);
+  -moz-transform: translateY(3px);
+}
+
+.form3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid #C0BCB5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 3px #C0BCB5;
+  padding: 1rem;
+  width: auto;
+  overflow: hidden;
+}
+.form3 .horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.form3 label {
+  display: block;
+  text-align: left;
+  width: 30%;
+}
+.form3 button {
+  border: 2px solid #C0BCB5;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  color: #0c0c0c;
+  min-width: 100px;
+  letter-spacing: 1px;
+  color: #173753;
+  transition: 300ms ease-in-out;
+  -webkit-transition: 300ms ease-in-out;
+  -moz-transition: 300ms ease-in-out;
+}
+.form3 button:hover {
+  color: #fff;
+  background-color: #173753;
+  border: 2px solid #fff;
+}
+.form3 button:active {
+  transform: translateY(3px);
+  -webkit-transform: translateY(3px);
+  -moz-transform: translateY(3px);
+}
+
+table {
+  border: 2px solid #1c2321;
+  border-collapse: collapse;
+}
+table th {
+  border: 2px solid #1c2321;
+  padding: 0.3rem 1rem;
+  background-color: #173753;
+  color: #fff;
+  min-width: 120px;
+}
+table td {
+  text-align: center;
+  border: 1px solid lightgrey;
+  padding: 0.3rem 1rem;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.myInput2 {
+  padding: 0.7rem 1.2rem;
+  background-color: #fff;
+  color: #173753;
+  width: 300px;
+  border: 2px solid #C0BCB5;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.red {
+  color: red;
 }
 
 .hidden {
