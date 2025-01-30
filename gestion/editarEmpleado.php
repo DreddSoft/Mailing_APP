@@ -32,6 +32,8 @@ $empleado = [];
 $departamentos = [];
 $idEmpleado = null;
 $emp = null;
+$actualizado = false;
+$mensaje = "";
 
 // Capturar la variable pasada por parametro url
 if (isset($_GET['id'])) {
@@ -56,17 +58,6 @@ if (isset($_GET['id'])) {
         } else {
             // Guardamos el idEmpleado en la variable de control $idEmpleado
             $idEmpleado = $empleado[0]["id"];
-
-            // Crear el objeto, dependiendo del tipo
-            if ($empleado[0]["rango"] == 1) {   // Es un encargado
-                $emp = new Encargado($empleado[0]["nombre"], $empleado[0]["edad"], $empleado[0]["salario"], $empleado[0]["rango"], 0);
-            } else if ($empleado[0]["oficina"] == null) {
-                // Si no tiene oficina es empleado Remoto
-                $emp = new EmpleadoRemoto($empleado[0]["nombre"], $empleado[0]["edad"], $empleado[0]["salario"], 0);
-            } else {
-                // El resto son empleados presenciales
-                $emp = new EmpleadoPresencial($empleado[0]["nombre"], $empleado[0]["edad"], $empleado[0]["salario"], $empleado[0]["oficina"]);
-            }
         }
     } catch (Exception $e) {
         echo "Error en la captura de datos de la base de datos: " . $e->getMessage();
@@ -97,16 +88,6 @@ if (isset($_GET['id'])) {
         } else {
             $idEmpleado = $empleado[0]["id"];
 
-            // Crear el objeto, dependiendo del tipo
-            if ($empleado[0]["rango"] == 1) {   // Es un encargado
-                $emp = new Encargado($empleado[0]["nombre"], $empleado[0]["edad"], $empleado[0]["salario"], $empleado[0]["rango"], 0);
-            } else if ($empleado[0]["oficina"] == null) {
-                // Si no tiene oficina es empleado Remoto
-                $emp = new EmpleadoRemoto($empleado[0]["nombre"], $empleado[0]["edad"], $empleado[0]["salario"], 0);
-            } else {
-                // El resto son empleados presenciales
-                $emp = new EmpleadoPresencial($empleado[0]["nombre"], $empleado[0]["edad"], $empleado[0]["salario"], $empleado[0]["oficina"]);
-            }
         }
     } catch (Exception $e) {
         echo "Error en la captura de datos de la base de datos: " . $e->getMessage();
@@ -116,8 +97,71 @@ if (isset($_GET['id'])) {
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {  //* Un else valdria, pero compruebo que se mande por POST
 
     // Si el envio es POST se entiende que el cliente ha hecho una modificacion del empleado
+    // Capturamos los datos en variables por sanitizar
+    $nombre = trim(htmlspecialchars($_POST["name"]));
+    $edad = htmlspecialchars($_POST["edad"]);
+    $salario = floatval(htmlspecialchars($_POST["salario"]));
+
+    // Oficina
+    $oficina = trim(htmlspecialchars($_POST["ofi"]));
+
+    // Si es remoto, el valor de la bd es nulo
+    if ($oficina == "Remoto") {
+        $oficina = null;
+    }
+
+    // Capturamos y controlamos los valores de rango
+    $rango = htmlspecialchars($_POST["rango"]);
+
+    // Comprobamos que se haya realizado el envio del incremento
+    if (isset($_POST["incre"])) {
+        $incremento = floatval(htmlspecialchars($_POST["incre"]));
+        $salario += $incremento;
+    }
+
+    // Capturamos el id del Departamento
+    $dpto = htmlspecialchars($_POST["dpto"]);
+
+    // Capturamos el id empleado
+    $idEmpleado = htmlspecialchars($_POST["idEmp"]);
+
+    try {
+        // Conectamos con la base de datos
+        $bd->conectar();
+
+        // Actualizamos los datos en la base de datos
+        $sql = "UPDATE empleados SET
+        nombre = '$nombre',
+        edad = $edad,
+        salario = $salario,
+        oficina = '$oficina',
+        rango = $rango,
+        idDpto = $dpto
+        WHERE id = $idEmpleado";
+
+        $actualizado = $bd->actualizarDatos($sql);
 
 
+        // Capturamos los datos de nuevo
+        $sql = "SELECT id, nombre, edad, salario, oficina, rango, idDpto FROM empleados WHERE id = $idEmpleado";
+
+        // Capturamos el empleado
+        $empleado = $bd->capturarDatos($sql);
+
+        $sql = "SELECT id, nombre, activo FROM departamentos";
+
+        $departamentos = $bd->capturarDatos($sql);
+
+        // Si el empleado esta vacio, no existe con ese nombre
+        if (empty($empleado)) {
+            $idEmpleado = null;
+        } else {
+            $idEmpleado = $empleado[0]["id"];
+
+        }
+    } catch (Exception $e) {
+        $mensaje = "Ha ocurrido un error: " . $e->getMessage();
+    }
 }
 
 ?>
@@ -168,7 +212,7 @@ if (isset($_GET['id'])) {
 
                 <div class="horizontal">
                     <label for="edad">Edad</label>
-                    <input type="text" name="edad" id="edad" value="<?= $empleado[0]["edad"] ?>" class="myInput2">
+                    <input type="number" name="edad" id="edad" value="<?= $empleado[0]["edad"] ?>" class="myInput2">
                 </div>
 
                 <div class="horizontal">
@@ -189,6 +233,14 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
 
+                <?php if ($empleado[0]["rango"] == 1) : ?>
+                    <div class="horizontal">
+                        <label for="incre">Incremento</label>
+                        <input type="number" name="incre" id="incre" class="myInput2">
+                    </div>
+
+                <?php endif; ?>
+
                 <div class="horizontal">
                     <label for="dpto">Dpto:</label>
                     <select name="dpto" id="dpto" class="myInput2">
@@ -201,9 +253,14 @@ if (isset($_GET['id'])) {
                 <input type="hidden" name="idEmp" id="idEmp" value="<?= $empleado[0]["id"] ?>">
 
                 <div class="horizontal">
-                    <button type="submit">Editar</button>
+                    <button type="submit">Modificar Empleado</button>
                 </div>
 
+                <?php if ($actualizado) : ?>
+                    <p class="red">Se han acutalizado los datos del empleado</p>
+                    <p><?= $mensaje;  ?></p>
+
+                <?php endif; ?>
 
 
             </form>

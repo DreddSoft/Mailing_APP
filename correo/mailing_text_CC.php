@@ -111,10 +111,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Enviar correo con copia</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text_CC.php" method="POST">
-            <input type="email" id="remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" name="remitente" readonly>
-            <input type="email" id="destino" required placeholder="Destinatario" name="destino">
-            <input type="email" id="copia" required placeholder="Copia" name="copia">
-            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
+            <input type="email" id="remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" name="remitente" readonly class="myInput3">
+            <input type="email" id="destino" required placeholder="Destinatario" name="destino" class="myInput3">
+            <input type="email" id="copia" required placeholder="Copia" name="copia" class="myInput3">
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto" class="myInput3">
             <div class="text-base" contenteditable="true" id="base"></div>
             <input type="hidden" name="mensaje" id="mensaje">
             <div class="btns">

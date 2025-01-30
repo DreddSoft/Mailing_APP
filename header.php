@@ -35,7 +35,7 @@ if ($filename == "index.php" || $filename == "login.php") {
                 <ul id="submenu2" class="hidden">
                     <li></li>
                     <li><a href="<?= $ruta ?>gestion/listadoEmpleados.php">Listado</a></li>
-                    <li><a href="#">Añadir</a></li>
+                    <li><a href="<?= $ruta ?>gestion/crearEmpleado.php">Añadir</a></li>
                     <li><a href="<?= $ruta ?>gestion/editarEmpleado.php">Editar</a></li>
                 </ul>
             </div>

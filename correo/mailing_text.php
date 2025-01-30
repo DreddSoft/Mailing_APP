@@ -103,9 +103,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Enviar correo</h2>
         <!-- Aquí va el formulario -->
         <form action="mailing_text.php" method="post">
-            <input id="remitente" type="email" placeholder="Email remitente" name="remitente" readonly value="<?php echo $_ENV["SMTP_USER"]; ?>">
-            <input id="destinatario" type="email" placeholder="Email destinatario" name="destinatario" required>
-            <input id="asunto" type="text" placeholder="Asunto:" name="asunto" required>
+            <input id="remitente" type="email" placeholder="Email remitente" name="remitente" readonly value="<?php echo $_ENV["SMTP_USER"]; ?>" class="myInput3">
+            <input id="destinatario" type="email" placeholder="Email destinatario" name="destinatario" required class="myInput3">
+            <input id="asunto" type="text" placeholder="Asunto:" name="asunto" required class="myInput3">
 
             <div class="text-base" contenteditable="true" id="base"></div>
             <input type="text" name="mensaje" hidden="true" id="mensaje">

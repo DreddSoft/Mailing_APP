@@ -128,21 +128,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h2>Enviar correo a destino seleccionado con copia</h2>
         <!-- Aquí va el formulario -->
         <form method="post">
-            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" readonly>
+            <input type="email" name="remitente" id="remitente" placeholder="Email del remitente" value="<?php echo $_ENV['SMTP_USER'] ?>" readonly class="myInput3">
 
-            <select name="destinatario" id="destinatario">
+            <select name="destinatario" id="destinatario" class="myInput3">
                 <?php foreach ($datos as $dato): ?>
                     <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
                 <?php endforeach; ?>
             </select>
 
-            <select name="copia" id="copia">
+            <select name="copia" id="copia" class="myInput3">
                 <?php foreach ($datos as $dato): ?>
                     <option value="<?php echo $dato["email"] ?>"><?php echo $dato["email"] ?></option>
                 <?php endforeach; ?>
             </select>
 
-            <input type="text" name="asunto" id="asunto" placeholder="Asunto">
+            <input type="text" name="asunto" id="asunto" placeholder="Asunto" class="myInput3">
 
             <textarea name="cuerpo" id="cuerpo" placeholder="Contenido del mensaje" require></textarea>
 

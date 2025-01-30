@@ -57,6 +57,17 @@ class bd
         return $data;
     }
 
+    //* Funcion para actualizar datos en tablas
+    public function actualizarDatos($sql) {
+
+        if (mysqli_query($this->conn, $sql)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
 
 
     public function cerrar()

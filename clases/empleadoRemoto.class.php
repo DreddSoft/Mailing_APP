@@ -8,8 +8,8 @@
 // - Metodo trabajar que muestre las horas de conexion (ver en enunciado Noemi)
 // - GETTERS y SETTERS
 
-
-// se usa requiere.once("empleado.php") a
+// Incluimos la base de datos
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
 
 
 
@@ -18,9 +18,30 @@ class EmpleadoRemoto extends Empleado{
 
     private $horasConexion;
 
-    public function __construct($nombre, $edad, $salario, $horasConexion){
-        parent::__construct($nombre, $edad, $salario);
+    public function __construct($nombre, $edad, $salario, $idDpto, $horasConexion){
+        parent::__construct($nombre, $edad, $salario, $idDpto);
         $this->horasConexion = $horasConexion;
+
+        try {
+            $bd = new bd();
+
+            // Conectamos a la base de datos
+            $bd->conectar();
+
+            $sql = "INSERT INTO empleados (nombre, edad, salario, oficina, horasConexion, rango, idDpto)
+            VALUES ('$nombre', $edad, $salario, NULL, $horasConexion, 0, $idDpto)";
+
+            $update = $bd->actualizarDatos($sql);
+
+            if (!$update) {
+                throw new Exception();
+            }
+
+        } catch (Exception $e) {
+            throw new Exception("No se ha podido crear el EMPLEADO REMOTO" . $e->getMessage());
+        } finally {
+            $bd->cerrar();
+        }
 
     }
 

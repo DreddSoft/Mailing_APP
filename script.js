@@ -1,3 +1,4 @@
+
 // funcion para mostrar submenu
 function mostrarSubmenu(id) {
 
@@ -29,5 +30,22 @@ function prepararMensaje() {
 function editarEmpleado(id) {
 
     window.open(`editarEmpleado.php?id=${id}`, "_blank");
+    
+}
+
+function showOficina() {
+    const iptOficina = document.getElementById("oficina");
+
+
+        iptOficina.classList.remove("hidden");
+
+}
+
+function hideOficina() {
+
+    const iptOficina = document.getElementById("oficina");
+
+
+    iptOficina.classList.add("hidden");
     
 }

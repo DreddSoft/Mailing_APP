@@ -80,7 +80,7 @@ main {
         width: 400px;
         overflow: hidden;
 
-        & input {
+        & .myInput1 {
             width: 200px;
             text-align: center;
         }
@@ -103,7 +103,7 @@ main {
             margin: 1rem 0;
         }
 
-        & input {
+        & .myInput3 {
             padding: 0.7rem 1.2rem 0.7rem 2rem;
             color: $black;
             border: 1px solid $silver;
@@ -118,7 +118,8 @@ main {
                 letter-spacing: 2px;
             }
             &:focus {
-                border: 1px solid transparent;
+                outline: none;
+                border: 1px solid $ecru;
 
             }
         }
@@ -281,6 +282,16 @@ main {
             -moz-transform: translateY(3px);
         }
     }
+
+    & .horizontal {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 30px;
+
+    }
 }
 
 .form3 {
@@ -315,6 +326,7 @@ main {
         border-radius: 4px;
         background-color: $white-base;
         padding: 0.7rem 1rem;
+        margin: 1rem;
         cursor: pointer;
         color: $black;
         min-width: 100px;
@@ -368,6 +380,18 @@ table {
     border-radius: 8px;
     // margin-bottom: 2rem;
     text-align: center;
+
+    &::placeholder {
+        color: rgba($color: $prusian-blue, $alpha: 0.6);
+        letter-spacing: 2px;
+        font-size: 20ox;
+        font-weight: bold;
+    }
+
+    &:focus {
+        outline: none;
+        border: 2px solid $ecru;
+    }
 
 }
 
