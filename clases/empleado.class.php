@@ -11,17 +11,19 @@
         private $nombre;
         private $edad;
         private $salario;
+        private $idDpto;
         //constructor de empleado
-        public function _construct($nombre, $edad, $salario){
+        public function __construct($nombre, $edad, $salario, $idDpto){
 
             $this->nombre = $nombre;
             $this->edad = $edad;
             $this->salario = $salario;
+            $this->idDpto = $idDpto;
         }
         //funcion que muestra todos los datos de un empleado
-        public function mostarDatos(){
+        public function mostrarDatos(){
 
-            return "$this->id" . "$this->nombre" . "$this->edad" . "$this->salario";
+            return $this->nombre . " " . $this->edad . " " . $this->salario;
         }
         //getters y setters para todos los atributos de empleado
         public function getId(){

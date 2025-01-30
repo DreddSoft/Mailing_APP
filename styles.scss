@@ -80,7 +80,7 @@ main {
         width: 400px;
         overflow: hidden;
 
-        & input {
+        & .myInput1 {
             width: 200px;
             text-align: center;
         }
@@ -99,7 +99,11 @@ main {
         width: 600px;
         overflow: hidden;
 
-        & input {
+        & label {
+            margin: 1rem 0;
+        }
+
+        & .myInput3 {
             padding: 0.7rem 1.2rem 0.7rem 2rem;
             color: $black;
             border: 1px solid $silver;
@@ -114,7 +118,8 @@ main {
                 letter-spacing: 2px;
             }
             &:focus {
-                border: 1px solid transparent;
+                outline: none;
+                border: 1px solid $ecru;
 
             }
         }
@@ -230,6 +235,168 @@ main {
 
         }
     }
+
+}
+
+.form2 {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $silver;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 3px $silver;
+    gap: 1rem;
+    padding:  2rem 1rem;
+    width: 600px;
+    overflow: hidden;
+
+    & p {
+        text-align: center;
+    }
+
+    & button {
+        border: 2px solid $anti-flash-white;
+        border-radius: 4px;
+        background-color: $white-base;
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+        color: $black;
+        min-width: 100px;
+        letter-spacing: 1px;
+        color: $prusian-blue;
+        transition: 300ms ease-in-out;
+        -webkit-transition: 300ms ease-in-out;
+        -moz-transition: 300ms ease-in-out;
+
+        &:hover {
+            color: $white-base;
+            background-color: $prusian-blue;
+            border: 2px solid $white-base;
+        }
+
+        &:active {
+            transform: translateY(3px);
+            -webkit-transform: translateY(3px);
+            -moz-transform: translateY(3px);
+        }
+    }
+
+    & .horizontal {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 30px;
+
+    }
+}
+
+.form3 {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border: 1px solid $silver;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 3px $silver;
+    padding:  1rem;
+    width: auto;
+    overflow: hidden;
+
+    & .horizontal {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    & label {
+        display: block;
+        text-align: left;
+        width: 30%;
+    }
+
+    & button {
+        border: 2px solid $anti-flash-white;
+        border-radius: 4px;
+        background-color: $white-base;
+        padding: 0.7rem 1rem;
+        margin: 1rem;
+        cursor: pointer;
+        color: $black;
+        min-width: 100px;
+        letter-spacing: 1px;
+        color: $prusian-blue;
+        transition: 300ms ease-in-out;
+        -webkit-transition: 300ms ease-in-out;
+        -moz-transition: 300ms ease-in-out;
+
+        &:hover {
+            color: $white-base;
+            background-color: $prusian-blue;
+            border: 2px solid $white-base;
+        }
+
+        &:active {
+            transform: translateY(3px);
+            -webkit-transform: translateY(3px);
+            -moz-transform: translateY(3px);
+        }
+    }
+}
+
+table {
+    border: 2px solid $eerie-black;
+    border-collapse: collapse;
+
+    & th {
+        border: 2px solid $eerie-black;
+        padding: 0.3rem 1rem;
+        background-color: $prusian-blue;
+        color: $white-base;
+        min-width: 120px;
+    }
+
+    & td {
+        text-align: center;
+        border: 1px solid lightgrey;
+        padding: 0.3rem 1rem;
+        min-width: 120px;
+        cursor: pointer;
+    }
+}
+
+.myInput2 {
+    padding: 0.7rem 1.2rem;
+    background-color: $white-base;
+    color: $prusian-blue;
+    width: 300px;
+    border: 2px solid $silver;
+    border-radius: 8px;
+    // margin-bottom: 2rem;
+    text-align: center;
+
+    &::placeholder {
+        color: rgba($color: $prusian-blue, $alpha: 0.6);
+        letter-spacing: 2px;
+        font-size: 20ox;
+        font-weight: bold;
+    }
+
+    &:focus {
+        outline: none;
+        border: 2px solid $ecru;
+    }
+
+}
+
+.red {
+    color: red;
 }
 
 .hidden {
@@ -237,3 +404,4 @@ main {
 }
 
 @import '_footer.scss';
+

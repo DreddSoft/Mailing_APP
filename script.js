@@ -1,3 +1,4 @@
+
 // funcion para mostrar submenu
 function mostrarSubmenu(id) {
 
@@ -24,4 +25,27 @@ function prepararMensaje() {
     const mensaje = document.getElementById('base').innerHTML;
     // Asignamos ese contenido al input oculto que enviara el mensaje
     document.getElementById('mensaje').value = mensaje;
+}
+
+function editarEmpleado(id) {
+
+    window.open(`editarEmpleado.php?id=${id}`, "_blank");
+    
+}
+
+function showOficina() {
+    const iptOficina = document.getElementById("oficina");
+
+
+        iptOficina.classList.remove("hidden");
+
+}
+
+function hideOficina() {
+
+    const iptOficina = document.getElementById("oficina");
+
+
+    iptOficina.classList.add("hidden");
+    
 }

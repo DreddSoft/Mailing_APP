@@ -42,8 +42,8 @@ if (isset($_GET['mensaje'])) {
         <h2 class="blue">Login</h2>
         <!-- Aquí va el formulario -->
         <form action="service.php" method="post" class="login">
-            <input type="text" name="user" id="user" placeholder="Usuario" required autocomplete="on">
-            <input type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="on">
+            <input type="text" name="user" id="user" placeholder="Usuario" required autocomplete="on" class="myInput2">
+            <input type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="on" class="myInput2">
 
             <div class="btns">
                 <button type="reset">Borrar</button>
