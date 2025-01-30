@@ -42,7 +42,7 @@ try {
 
     $departamentos = $bd->capturarDatos($sql);
 } catch (Exception $e) {
-    die("Error al cargar los departamentos de la base de datos: " . $e->getMessage());
+    echo "Error al cargar los departamentos de la base de datos: " . $e->getMessage();
 } finally {
     $bd->cerrar();
 }
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $encargado = new Encargado($nombre, $edad, $salario, $idDpto, $rango, 0);
         } catch (Exception $e) {
-            die($e->getMessage());
+            echo $e->getMessage();
         }
 
         $actualizado = true;
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $empleadoRemoto = new EmpleadoRemoto($nombre, $edad, $salario, $idDpto, 0);
         } catch (Exception $e) {
-            die($e->getMessage());
+            echo $e->getMessage();
         }
 
         $actualizado = true;
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $empleadoPresencial = new EmpleadoPresencial($nombre, $edad, $salario, $idDpto, $oficina);
         } catch (Exception $e) {
-            die($e->getMessage());
+            echo $e->getMessage();
         }
 
         $actualizado = true;
