@@ -53,9 +53,9 @@ class EmpleadoPresencial extends Empleado {
         $this->oficina = $oficina;
     }
 
-    // FUNCIONES PROPIAS
-    public function mostrarDatos() {
-        return parent::mostrarDatos() . " , oficina: $this->oficina";
+    // Funcion de la clase empleado, plimorfismo porque añade mas detalles
+    public function mostrarDetalles() {
+        return parent::mostrarDetalles() . " , oficina: $this->oficina";
     }
 
 

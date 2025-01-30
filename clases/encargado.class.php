@@ -50,9 +50,9 @@ class Encargado extends Empleado {
 
     }
 
-    // Metodo mostrarDatos que muestra todos los datos del empleado
-    public function mostrarDatos() {
-        return parent::mostrarDatos() . "Rango: $this->rango, Incremento salarial: $this->incrementoSalarial";
+    // Metodo mostrarDetalles que extiende y sobrescribe el metodo de la clase empleado
+    public function mostrarDetalles() {
+        return parent::mostrarDetalles() . "Rango: $this->rango, Incremento salarial: $this->incrementoSalarial";
     }
 
     // GETTERS y SETTERS

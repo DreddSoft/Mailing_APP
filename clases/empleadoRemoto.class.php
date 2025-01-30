@@ -55,9 +55,10 @@ class EmpleadoRemoto extends Empleado{
         $this->horasConexion = $horasConect;
     }
 
-    public function mostrarDatos()
+    // funcion heredada de la clase empleado que cumple el polimorfismo
+    public function mostrarDetalles()
     {
-        return parent::mostrarDatos();
+        return parent::mostrarDetalles() . ", horas de conexión: " . $this->horasConexion;
     }
 
     public function trabajado()

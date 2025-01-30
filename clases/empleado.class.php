@@ -21,7 +21,7 @@
             $this->idDpto = $idDpto;
         }
         //funcion que muestra todos los datos de un empleado
-        public function mostrarDatos(){
+        public function mostrarDetalles(){
 
             return $this->nombre . " " . $this->edad . " " . $this->salario;
         }
