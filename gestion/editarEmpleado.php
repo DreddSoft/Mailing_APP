@@ -43,10 +43,19 @@ if (isset($_GET['id'])) {
 
         $bd->conectar();
 
-        $sql = "SELECT id, nombre, edad, salario, oficina, rango, idDpto FROM empleados WHERE id = $idEmpleado";
+        $sql = "SELECT id, nombre, edad, salario, oficina, horasConexion, rango, idDpto FROM empleados WHERE id = $idEmpleado";
 
         // Capturamos el empleado
         $empleado = $bd->capturarDatos($sql);
+
+        // Depuramos las variables de la consulta empleado
+        $nombre = $empleado[0]['nombre'];
+        $edad = $empleado[0]['edad'];
+        $salario = $empleado[0]['salario'];
+        $oficina = $empleado[0]['oficina'];
+        $rango = $empleado[0]['rango'];
+        $idDpto = $empleado[0]['idDpto'];
+        $horasConexion = $empleado[0]['horasConexion'];
 
         $sql = "SELECT id, nombre, activo FROM departamentos";
 
@@ -58,6 +67,34 @@ if (isset($_GET['id'])) {
         } else {
             // Guardamos el idEmpleado en la variable de control $idEmpleado
             $idEmpleado = $empleado[0]["id"];
+
+            //* Crear el objeto en base a los parámetros clave
+            if ($rango == 1) {
+
+                // Creamos un objeto encargado
+                try {
+                    echo "Entra en crear Encargado<br>";
+                    $empleadoObj = new Encargado($nombre, $edad, $salario, $idDpto, $rango, 0, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else if (empty($oficina)) {
+                // Creamos objeto Empleado Remoto
+                try {
+                    echo "Entra en crear Empleado Remoto<br>";
+                    $empleadoRemoto = new EmpleadoRemoto($nombre, $edad, $salario, $idDpto, 0, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                // Creamos objeto Empleado Presencial
+                try {
+                    echo "Entra en crear Empleado Presencial<br>";
+                    $empleadoPresencial = new EmpleadoPresencial($nombre, $edad, $salario, $idDpto, $oficina, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
         }
     } catch (Exception $e) {
         echo "Error en la captura de datos de la base de datos: " . $e->getMessage();
@@ -73,10 +110,19 @@ if (isset($_GET['id'])) {
 
         $bd->conectar();
 
-        $sql = "SELECT id, nombre, edad, salario, oficina, rango, idDpto FROM empleados WHERE nombre like '$nombreEmpleado'";
+        $sql = "SELECT id, nombre, edad, salario, oficina, horasConexion, rango, idDpto FROM empleados WHERE nombre like '$nombreEmpleado'";
 
         // Capturamos el empleado
         $empleado = $bd->capturarDatos($sql);
+
+        // Depuramos las variables de la consulta empleado
+        $nombre = $empleado[0]['nombre'];
+        $edad = $empleado[0]['edad'];
+        $salario = $empleado[0]['salario'];
+        $oficina = $empleado[0]['oficina'];
+        $rango = $empleado[0]['rango'];
+        $idDpto = $empleado[0]['idDpto'];
+        $horasConexion = $empleado[0]['horasConexion'];
 
         $sql = "SELECT id, nombre, activo FROM departamentos";
 
@@ -88,6 +134,30 @@ if (isset($_GET['id'])) {
         } else {
             $idEmpleado = $empleado[0]["id"];
 
+            //* Crear el objeto en base a los parámetros clave
+            if ($rango == 1) {
+
+                // Creamos un objeto encargado
+                try {
+                    $empleadoObj = new Encargado($nombre, $edad, $salario, $idDpto, $rango, 0, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else if (empty($oficina)) {
+                // Creamos objeto Empleado Remoto
+                try {
+                    $empleadoRemoto = new EmpleadoRemoto($nombre, $edad, $salario, $idDpto, $horasConexion, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                // Creamos objeto Empleado Presencial
+                try {
+                    $empleadoPresencial = new EmpleadoPresencial($nombre, $edad, $salario, $idDpto, $oficina, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
         }
     } catch (Exception $e) {
         echo "Error en la captura de datos de la base de datos: " . $e->getMessage();
@@ -143,10 +213,19 @@ if (isset($_GET['id'])) {
 
 
         // Capturamos los datos de nuevo
-        $sql = "SELECT id, nombre, edad, salario, oficina, rango, idDpto FROM empleados WHERE id = $idEmpleado";
+        $sql = "SELECT id, nombre, edad, salario, oficina, horasConexion, rango, idDpto FROM empleados WHERE id = $idEmpleado";
 
         // Capturamos el empleado
         $empleado = $bd->capturarDatos($sql);
+
+        // Depuramos las variables de la consulta empleado
+        $nombre = $empleado[0]['nombre'];
+        $edad = $empleado[0]['edad'];
+        $salario = $empleado[0]['salario'];
+        $oficina = $empleado[0]['oficina'];
+        $rango = $empleado[0]['rango'];
+        $idDpto = $empleado[0]['idDpto'];
+        $horasConexion = $empleado[0]['horasConexion'];
 
         $sql = "SELECT id, nombre, activo FROM departamentos";
 
@@ -158,6 +237,30 @@ if (isset($_GET['id'])) {
         } else {
             $idEmpleado = $empleado[0]["id"];
 
+            //* Crear el objeto en base a los parámetros clave
+            if ($rango == 1) {
+
+                // Creamos un objeto encargado
+                try {
+                    $empleadoObj = new Encargado($nombre, $edad, $salario, $idDpto, $rango, 0, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else if (empty($oficina)) {
+                // Creamos objeto Empleado Remoto
+                try {
+                    $empleadoRemoto = new EmpleadoRemoto($nombre, $edad, $salario, $idDpto, 0, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                // Creamos objeto Empleado Presencial
+                try {
+                    $empleadoPresencial = new EmpleadoPresencial($nombre, $edad, $salario, $idDpto, $oficina, $idEmpleado);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
         }
     } catch (Exception $e) {
         $mensaje = "Ha ocurrido un error: " . $e->getMessage();
@@ -207,17 +310,17 @@ if (isset($_GET['id'])) {
 
                 <div class="horizontal">
                     <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" value="<?= $empleado[0]["nombre"] ?>" class="myInput2">
+                    <input type="text" name="name" id="name" value="<?= $empleadoObj->getNombre(); ?>" class="myInput2">
                 </div>
 
                 <div class="horizontal">
                     <label for="edad">Edad</label>
-                    <input type="number" name="edad" id="edad" value="<?= $empleado[0]["edad"] ?>" class="myInput2">
+                    <input type="number" name="edad" id="edad" value="<?= $empleadoObj->getEdad(); ?>" class="myInput2">
                 </div>
 
                 <div class="horizontal">
                     <label for="salario">Salario</label>
-                    <input type="number" name="salario" id="salario" value="<?= $empleado[0]["salario"] ?>" class="myInput2">
+                    <input type="number" name="salario" id="salario" value="<?= $empleadoObj->getSalario(); ?>" class="myInput2">
                 </div>
 
                 <div class="horizontal">
@@ -228,12 +331,12 @@ if (isset($_GET['id'])) {
                 <div class="horizontal">
                     <label for="rango">Rango</label>
                     <select name="rango" id="rango" class="myInput2">
-                        <option value="1" <?php if ($empleado[0]["rango"] == 1) echo " selected"; ?>>Encargado</option>
-                        <option value="0" <?php if ($empleado[0]["rango"] == 0 || $empleado[0]["rango"] == null) echo " selected"; ?>>Empleado</option>
+                        <option value="1" <?php if ($empleadoObj->getRango()) echo " selected"; ?>>Encargado</option>
+                        <option value="0" <?php if (!$empleadoObj->getRango()) echo " selected"; ?>>Empleado</option>
                     </select>
                 </div>
 
-                <?php if ($empleado[0]["rango"] == 1) : ?>
+                <?php if ($empleadoObj->getRango() == 1) : ?>
                     <div class="horizontal">
                         <label for="incre">Incremento</label>
                         <input type="number" name="incre" id="incre" class="myInput2">
@@ -245,7 +348,7 @@ if (isset($_GET['id'])) {
                     <label for="dpto">Dpto:</label>
                     <select name="dpto" id="dpto" class="myInput2">
                         <?php foreach ($departamentos as $departamento) : ?>
-                            <option value="<?= $departamento['id'] ?>" <?php if ($departamento['id'] == $empleado[0]['idDpto']) echo " selected"; ?>><?= $departamento['nombre'] ?></option>
+                            <option value="<?= $departamento['id'] ?>" <?php if ($departamento['id'] == $empleadoObj->getIdDpto()) echo " selected"; ?>><?= $departamento['nombre'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -261,7 +364,12 @@ if (isset($_GET['id'])) {
                     <p><?= $mensaje;  ?></p>
 
                 <?php endif; ?>
+                <p><?php echo $empleadoObj->mostrarDetalles(); ?></p>
 
+                <?php if(get_class($empleadoObj) == "EmpleadoRemoto"): ?>
+
+                    <p><?= $empleadoObj->trabajar(); ?></p>
+                <?php endif; ?>
 
             </form>
 
