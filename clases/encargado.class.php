@@ -1,6 +1,5 @@
 <?php
 
-
 //! EN ESTA CLASE ESTAMOS IMITANDO MANUALMENTE UN ORM
 //* ADRIAN
 
@@ -9,11 +8,9 @@
 // ✅ Metodo mostrarDatos(): el to string que muestre todos los datos del empleado
 // ✅ GETTERS y SETTERS
 
-// Incluimos la clase empleado
+// Incluimos la clase empleado y la base de datos
 require_once 'empleado.class.php';
-// Incluimos la base de datos
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
-
 
 
 // Clase Encargado que extiende de Empleado
@@ -22,35 +19,39 @@ class Encargado extends Empleado {
     private $rango;
     private $incrementoSalarial;
 
-    // Constructor
+    // Constructor de la clase
     public function __construct($nombre, $edad, $salario, $idDpto,  $rango, $incrementoSalarial) {
         parent::__construct($nombre, $edad, $salario + $incrementoSalarial, $idDpto);
         $this->rango = $rango;
 
         try {
+            // Creamos un objeto de la clase bd
             $bd = new bd();
 
             // Conectamos a la base de datos
             $bd->conectar();
 
+            // Preparamos la inserccion
             $sql = "INSERT INTO empleados (nombre, edad, salario, oficina, horasConexion, rango, idDpto)
             VALUES ('$nombre', $edad, $salario, NULL, NULL, 1, $idDpto)";
 
+            // Ejecutamos la inserccion
             $update = $bd->actualizarDatos($sql);
 
+            // Si no se ha podido insertar lanzamos una excepcion
             if (!$update) {
                 throw new Exception();
             }
-
         } catch (Exception $e) {
+            // Lanzamos la excepcion si encontramos algo
             throw new Exception("No se ha podido crear el EMPLEADO TIPO ENCARGADO" . $e->getMessage());
         } finally {
+            // Cerramos la base de datos
             $bd->cerrar();
         }
-
     }
 
-    // Metodo mostrarDatos que muestra todos los datos del empleado
+    // Metodo que muestra todos los datos del empleado
     public function mostrarDatos() {
         return parent::mostrarDatos() . "Rango: $this->rango, Incremento salarial: $this->incrementoSalarial";
     }
