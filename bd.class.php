@@ -61,10 +61,10 @@ class bd
     public function actualizarDatos($sql) {
 
         if (mysqli_query($this->conn, $sql)) {
-            return true;
+            return mysqli_insert_id($this->conn);
         }
 
-        return false;
+        return -1;
 
     }
 

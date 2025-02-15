@@ -14,35 +14,40 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Mailing_APP/bd.class.php');
 
 
 require_once("empleado.class.php");
-class EmpleadoRemoto extends Empleado{
+class EmpleadoRemoto extends Empleado
+{
 
     private $horasConexion;
+    private $id;
 
-    public function __construct($nombre, $edad, $salario, $idDpto, $horasConexion){
+    public function __construct($nombre, $edad, $salario, $idDpto, $horasConexion, $id = null)
+    {
         parent::__construct($nombre, $edad, $salario, $idDpto);
         $this->horasConexion = $horasConexion;
 
-        try {
-            $bd = new bd();
+        if ($id === null) {
+            try {
+                $bd = new bd();
 
-            // Conectamos a la base de datos
-            $bd->conectar();
+                // Conectamos a la base de datos
+                $bd->conectar();
 
-            $sql = "INSERT INTO empleados (nombre, edad, salario, oficina, horasConexion, rango, idDpto)
+                $sql = "INSERT INTO empleados (nombre, edad, salario, oficina, horasConexion, rango, idDpto)
             VALUES ('$nombre', $edad, $salario, NULL, $horasConexion, 0, $idDpto)";
 
-            $update = $bd->actualizarDatos($sql);
+                $update = $bd->actualizarDatos($sql);
 
-            if (!$update) {
-                throw new Exception();
+                if (!$update) {
+                    throw new Exception();
+                }
+            } catch (Exception $e) {
+                throw new Exception("No se ha podido crear el EMPLEADO REMOTO" . $e->getMessage());
+            } finally {
+                $bd->cerrar();
             }
-
-        } catch (Exception $e) {
-            throw new Exception("No se ha podido crear el EMPLEADO REMOTO" . $e->getMessage());
-        } finally {
-            $bd->cerrar();
+        } else {
+            $this->id = $id;
         }
-
     }
 
     public function getHoraConexion()
@@ -55,12 +60,13 @@ class EmpleadoRemoto extends Empleado{
         $this->horasConexion = $horasConect;
     }
 
-    public function mostrarDatos()
+    // funcion heredada de la clase empleado que cumple el polimorfismo
+    public function mostrarDetalles()
     {
-        return parent::mostrarDatos();
+        return parent::mostrarDetalles() . ", horas de conexión: " . $this->horasConexion;
     }
 
-    public function trabajado()
+    public function trabajar()
     {
         return "Tus horas de trabajo como esclavo son: " . $this->getHoraConexion();
     }

@@ -32,7 +32,7 @@ try {
     $sql = "SELECT E.id, E.nombre, E.edad, E.salario, E.oficina, E.rango, D.nombre AS nombreDpto
     FROM empleados AS E 
     LEFT JOIN departamentos AS D ON D.id = E.idDpto
-    ORDER BY salario";
+    ORDER BY E.id";
 
     $empleados = $bd->capturarDatos($sql);
 
